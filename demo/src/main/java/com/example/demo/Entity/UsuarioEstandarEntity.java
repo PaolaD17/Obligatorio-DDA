@@ -14,9 +14,5 @@ public class UsuarioEstandarEntity extends UsuarioEntity {
 
     public UsuarioEstandarEntity() {
     }
-
-    @Override
-    public String toString() {
-        return "UsuarioEstandarEntity [id=" + getId() + ", nombreCompleto=" + getNombreCompleto() + ", email=" + getEmail() + ", fechaRegistro=" + getFechaRegistro() + "]";
-    }
+    
 }
