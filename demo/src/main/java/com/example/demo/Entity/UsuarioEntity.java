@@ -36,6 +36,8 @@ public class UsuarioEntity {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReproduccionEntity> reproducciones = new ArrayList<>();
     
+    
+
     public int getId() {
         return id;
     }
@@ -68,6 +70,14 @@ public class UsuarioEntity {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public List<ReproduccionEntity> getReproducciones() {
+        return reproducciones;
+    }
+
+    public void setReproducciones(List<ReproduccionEntity> reproducciones) {
+        this.reproducciones = reproducciones;
+    }
+    
     public UsuarioEntity(int id, String nombreCompleto, String email, LocalDate fechaRegistro, List<ReproduccionEntity> reproducciones) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
@@ -81,6 +91,6 @@ public class UsuarioEntity {
 
     @Override
     public String toString() {
-        return "UsuarioEntity [id=" + id + ", nombreCompleto=" + nombreCompleto + ", email=" + email + ", fechaRegistro=" + fechaRegistro + ", reproducciones=" + reproducciones + "]";
+        return "Usuario: " + id + "\nNombre completo: " + nombreCompleto + "\nE-Mail: " + email + "\nFecha de registro: " + fechaRegistro + "\nReproducciones: " + reproducciones;
     }
 }

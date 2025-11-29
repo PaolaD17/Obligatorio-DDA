@@ -102,7 +102,7 @@ public class ReproduccionEntity {
     
     @Override
     public String toString() {
-        return "ReproduccionEntity [id=" + id + ", usuario=" + usuario + ", contenido=" + contenido + ", fechaHora="
-                + fechaHora + ", duracionMinutos=" + duracionMinutos + ", calificacion=" + calificacion + "]";
+        return "Reproducción: " + id + "\nUsuario: " + usuario.getNombreCompleto() + "\nContenido: " + contenido.getTitulo() + "\nFecha y hora: "
+                + fechaHora + "\nDuración: " + duracionMinutos + "\nCalificación: " + calificacion;
     }
 }

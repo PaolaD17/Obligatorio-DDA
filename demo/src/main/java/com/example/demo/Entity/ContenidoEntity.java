@@ -155,8 +155,8 @@ public class ContenidoEntity {
 
     @Override
     public String toString() {
-        return "ContenidoEntity [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", categoria="
-                + categoria + ", duracion=" + duracion + ", anioEstreno=" + anioEstreno + ", precioSuscripcion="
-                + precioSuscripcion + ", portadaUrl=" + portadaUrl + ", trailerUrl=" + trailerUrl + ", reproducciones=" + reproducciones + ", exclusivoPremium=" + exclusivoPremium + "]";
+        return "Contenido:\nId: " + id + "\nTítulo: " + titulo + "\nDescripción: " + descripcion + "\nCategoría: "
+                + categoria + "\nDuración: " + duracion + "\nAño de estreno: " + anioEstreno + "\nPrecio de suscripción: "
+                + precioSuscripcion + "\nPortada: " + portadaUrl + "\nTrailer: " + trailerUrl + "\nExclusivo: " + (exclusivoPremium ? "Sí" : "No");
     }
 }
