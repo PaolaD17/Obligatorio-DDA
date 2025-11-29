@@ -1,11 +1,13 @@
 package com.example.demo.Entity;
 
 import java.time.Duration;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class ContenidoEntity {
@@ -29,6 +31,9 @@ public class ContenidoEntity {
 
     private String trailerUrl;
 
+    @OneToMany(mappedBy = "contenido")
+    private List<ReproduccionEntity> reproducciones;
+    
     public int getId() {
         return id;
     }
@@ -101,8 +106,16 @@ public class ContenidoEntity {
         this.trailerUrl = trailerUrl;
     }
 
+    public List<ReproduccionEntity> getReproducciones() {
+        return reproducciones;
+    }
+
+    public void setReproducciones(List<ReproduccionEntity> reproducciones) {
+        this.reproducciones = reproducciones;
+    }
+
     public ContenidoEntity(int id, String titulo, String descripcion, String categoria, Duration duracion,
-            int anioEstreno, int precioSuscripcion, String portadaUrl, String trailerUrl) {
+            int anioEstreno, int precioSuscripcion, String portadaUrl, String trailerUrl, List<ReproduccionEntity> reproducciones) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -121,6 +134,6 @@ public class ContenidoEntity {
     public String toString() {
         return "ContenidoEntity [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", categoria="
                 + categoria + ", duracion=" + duracion + ", anioEstreno=" + anioEstreno + ", precioSuscripcion="
-                + precioSuscripcion + ", portadaUrl=" + portadaUrl + ", trailerUrl=" + trailerUrl + "]";
+                + precioSuscripcion + ", portadaUrl=" + portadaUrl + ", trailerUrl=" + trailerUrl + ", reproducciones=" + reproducciones + "]";
     }
 }

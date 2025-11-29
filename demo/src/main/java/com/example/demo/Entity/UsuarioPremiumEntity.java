@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class UsuarioPremiumEntity extends UsuarioEntity {
@@ -11,10 +12,10 @@ public class UsuarioPremiumEntity extends UsuarioEntity {
 
     private double descuento = 0.20; // 20% de descuento en contenidos
 
-    private boolean accesoExclusivo = true; // Acceso a contenidos exclusivos
+    private boolean accesoExclusivo = true; // Acceso fijo a contenidos exclusivos
 
-    public UsuarioPremiumEntity(int id, String nombreCompleto, String email, LocalDate fechaRegistro, LocalDate fechaInicioMembresia) {
-        super (id, nombreCompleto, email, fechaRegistro);
+    public UsuarioPremiumEntity(int id, String nombreCompleto, String email, LocalDate fechaRegistro, LocalDate fechaInicioMembresia, List<ReproduccionEntity> reproducciones) {
+        super(id, nombreCompleto, email, fechaRegistro, reproducciones);
         this.fechaInicioMembresia = fechaInicioMembresia;
     }
 
