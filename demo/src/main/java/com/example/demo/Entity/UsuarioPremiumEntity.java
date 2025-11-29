@@ -26,7 +26,15 @@ public class UsuarioPremiumEntity extends UsuarioEntity {
 
     @Override
     public String toString() {
-        return "Usuario: " + getId() + "\nNombre completo: " + getNombreCompleto() + "\nE-Mail: " + getEmail() + "\nFecha de registro: " + getFechaRegistro()
-        + "\nReproducciones: " + reproducciones + "\nFecha de inicio de membresía: " + fechaInicioMembresia + "\nDescuento: " + (descuento * 100) + "%\nAcceso exclusivo: " + (accesoExclusivo ? "Sí" : "No");
+        return "Usuario Premium\n" +
+           "ID: " + getId() + "\n" +
+           "Nombre completo: " + getNombreCompleto() + "\n" +
+           "E-Mail: " + getEmail() + "\n" +
+           "Fecha de registro: " + getFechaRegistro() + "\n" +
+           "Reproducciones: " + (getReproducciones() != null ? getReproducciones().size() : 0) + "\n" +
+           "Fecha de inicio de membresía: " + fechaInicioMembresia + "\n" +
+           "Descuento: " + (descuento * 100) + "%\n" +
+           "Acceso exclusivo: " + (accesoExclusivo ? "Sí" : "No");
+
     }
 }
