@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,7 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,14 +22,17 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "El nombre completo no puede estar vacío")
     private String nombreCompleto;
 
+    @Email(message = "El email debe tener un formato válido")
+    @NotBlank(message = "El email no puede estar vacío")
     private String email;
 
+    @NotNull(message = "La fecha de registro no puede ser nula")
     private LocalDate fechaRegistro;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReproduccionEntity> reproducciones;
     
     public int getId() {
