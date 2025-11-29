@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -26,10 +29,14 @@ public class ReproduccionEntity {
     @JoinColumn(name = "contenido_id")
     private ContenidoEntity contenido;
 
+    @NotNull(message = "La fecha y hora de reproducción no puede ser nula")
     private LocalDateTime fechaHora;
 
+    @Min(1)
     private int duracionMinutos;
 
+    @Min(1)
+    @Max(5)
     private int calificacion; // 1–5 estrellas
 
     public int getId() {

@@ -1,13 +1,20 @@
 package com.example.demo.Entity;
 
-import java.time.Duration;
+import java.math.BigDecimal;
+import java.time.Year;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ContenidoEntity {
@@ -15,25 +22,39 @@ public class ContenidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @NotBlank(message = "El título no puede estar vacío")
     private String titulo;
 
+    @NotBlank(message = "La descripción no puede estar vacía")
     private String descripcion;
 
+    @NotBlank(message = "La categoría no puede estar vacía")
     private String categoria;
 
-    private Duration duracion;
+    @Min(1)
+    private int duracion;
 
+    @Min(1888)
     private int anioEstreno;
 
-    private int precioSuscripcion;
+    @AssertTrue(message = "El año de estreno no puede ser mayor al actual")
+    public boolean isAnioValido() {
+        return anioEstreno <= Year.now().getValue();
+    }
+
+    @NotNull(message = "El precio de suscripción es obligatorio")
+    @DecimalMin("0.0")
+    private BigDecimal precioSuscripcion;
     
     private String portadaUrl;
 
     private String trailerUrl;
 
-    @OneToMany(mappedBy = "contenido")
+    @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReproduccionEntity> reproducciones;
     
+    private boolean exclusivoPremium = false;
+
     public int getId() {
         return id;
     }
@@ -66,27 +87,27 @@ public class ContenidoEntity {
         this.categoria = categoria;
     }
 
-    public Duration getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(Duration duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
-    public int getanioEstreno() {
+    public int getAnioEstreno() {
         return anioEstreno;
     }
 
-    public void setanioEstreno(int anioEstreno) {
+    public void setAnioEstreno(int anioEstreno) {
         this.anioEstreno = anioEstreno;
     }
 
-    public int getPrecioSuscripcion() {
+    public BigDecimal getPrecioSuscripcion() {
         return precioSuscripcion;
     }
 
-    public void setPrecioSuscripcion(int precioSuscripcion) {
+    public void setPrecioSuscripcion(BigDecimal precioSuscripcion) {
         this.precioSuscripcion = precioSuscripcion;
     }
 
@@ -114,8 +135,8 @@ public class ContenidoEntity {
         this.reproducciones = reproducciones;
     }
 
-    public ContenidoEntity(int id, String titulo, String descripcion, String categoria, Duration duracion,
-            int anioEstreno, int precioSuscripcion, String portadaUrl, String trailerUrl, List<ReproduccionEntity> reproducciones) {
+    public ContenidoEntity(int id, String titulo, String descripcion, String categoria, int duracion,
+            int anioEstreno, BigDecimal precioSuscripcion, String portadaUrl, String trailerUrl, List<ReproduccionEntity> reproducciones, boolean exclusivoPremium) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -125,6 +146,8 @@ public class ContenidoEntity {
         this.precioSuscripcion = precioSuscripcion;
         this.portadaUrl = portadaUrl;
         this.trailerUrl = trailerUrl;
+        this.reproducciones = reproducciones;
+        this.exclusivoPremium = exclusivoPremium;
     }
 
     public ContenidoEntity() {
@@ -134,6 +157,6 @@ public class ContenidoEntity {
     public String toString() {
         return "ContenidoEntity [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", categoria="
                 + categoria + ", duracion=" + duracion + ", anioEstreno=" + anioEstreno + ", precioSuscripcion="
-                + precioSuscripcion + ", portadaUrl=" + portadaUrl + ", trailerUrl=" + trailerUrl + ", reproducciones=" + reproducciones + "]";
+                + precioSuscripcion + ", portadaUrl=" + portadaUrl + ", trailerUrl=" + trailerUrl + ", reproducciones=" + reproducciones + ", exclusivoPremium=" + exclusivoPremium + "]";
     }
 }

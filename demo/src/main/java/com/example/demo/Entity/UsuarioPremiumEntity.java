@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 @Entity
 public class UsuarioPremiumEntity extends UsuarioEntity {
 
+    @NotNull(message = "La fecha de inicio de membresía no puede ser nula")
     private LocalDate fechaInicioMembresia;
 
     private double descuento = 0.20; // 20% de descuento en contenidos
