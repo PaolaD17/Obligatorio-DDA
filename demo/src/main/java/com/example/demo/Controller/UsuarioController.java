@@ -1,40 +1,43 @@
 package com.example.demo.Controller;
 
-import java.util.List;
+import com.example.demo.Entity.UsuarioEntity;
+import com.example.demo.Service.UsuarioService;
+
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.ui.Model;
-
-import com.example.demo.Entity.UsuarioEntity;
-import com.example.demo.Service.UsuarioService;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    @PostConstruct
+    public void init() {
+        System.out.println("✅ UsuarioController CARGADO");
+    }
+
     @Autowired
     private UsuarioService usuarioService;
 
+    // ✅ LISTAR USUARIOS
     @GetMapping("/listar")
-    public String mostrarLista(Model model) {
-        List<UsuarioEntity> lista = usuarioService.getUsuarios();
-        model.addAttribute("usuarios", lista);
-        return "UsuariosListar";
+    public String listarUsuarios(Model model) {
+        model.addAttribute("usuarios", usuarioService.getUsuarios());
+        return "UsuariosListar";   // ⚠️ SOLO EL NOMBRE, SIN /usuarios/
     }
 
-    @GetMapping("/agregar")
+    // ✅ FORMULARIO NUEVO USUARIO
+    @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
-        model.addAttribute("usuario", new UsuarioEntity());
-        return "UsuariosAgregar";
+        model.addAttribute("usuarios", new UsuarioEntity());
+        return "UsuariosAgregar"; // ⚠️ SOLO EL NOMBRE
     }
 
-    @PostMapping("/agregar")
+    // ✅ GUARDAR USUARIO
+    @PostMapping("/guardar")
     public String guardarUsuario(@ModelAttribute UsuarioEntity usuario) {
         usuarioService.postUsuario(usuario);
         return "redirect:/usuarios/listar";
