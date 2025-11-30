@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>StreamUp</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="/estilos.css">
 </head>
 <body>
 
@@ -11,21 +11,80 @@
         <nav class="navbar">
             <div class="logo">🎬 StreamUp</div>
             <ul class="nav-links">
-                <li><a href="/usuarios">Usuarios</a></li>
-                <li><a href="/contenidos">Contenidos</a></li>
-                <li><a href="/reproducciones">Reproducciones</a></li>
-                <li><a href="/estadisticas">Estadísticas</a></li>
+                <!-- USUARIOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Usuarios ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/usuarios/listar">Listar Usuarios</a></li>
+                        <li><a href="/usuarios/nuevo">Agregar Usuario</a></li>
+                    </ul>
+                </li>
+                <!-- CONTENIDOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Contenidos ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contenidos">Listar contenidos</a></li>
+                        <li><a href="/contenidos/nuevo">Agregar Contenido</a></li>
+                    </ul>
+                </li>
+                <!-- REPRODUCCIONES -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Reproducciones ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/reproducciones">Listar reproducciones</a></li>
+                        <li><a href="/reproducciones/nuevo">Agregar Reproducción</a></li>
+                    </ul>
+                </li>
+                <!-- ESTADÍSTICAS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Estadísticas ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/estadisticas">Usuarios</a></li>
+                        <li><a href="/estadisticas">Contenidos</a></li>
+                        <li><a href="/estadisticas">Reproducciones</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main class="contenido-principal">
-        <img src="StreamUp.png" class="imagen-principal" alt="Imagen de bienvenida">
+        <img src="/StreamUp.png" class="imagen-principal" alt="Imagen de bienvenida">
     </main>
 
     <footer class="footer">
         &copy; 2025 StreamUp. Todos los derechos reservados.
     </footer>
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                const parent = this.parentElement;
+
+                // Cierra los otros dropdowns abiertos
+                document.querySelectorAll(".dropdown").forEach(drop => {
+                    if (drop !== parent) {
+                        drop.classList.remove("open");
+                    }
+                });
+
+                // Abre o cierra el actual
+                parent.classList.toggle("open");
+            });
+        });
+
+        // ✅ Cerrar dropdown si se hace click fuera
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".dropdown")) {
+                document.querySelectorAll(".dropdown").forEach(drop => {
+                    drop.classList.remove("open");
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

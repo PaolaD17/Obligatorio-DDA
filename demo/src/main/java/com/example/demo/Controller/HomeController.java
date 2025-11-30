@@ -14,4 +14,9 @@ public class HomeController {
     public String contenidos() {
         return "forward:/contenidos.html";
     }
+
+    @GetMapping("/usuarios")
+    public String usuarios() {
+        return "forward:/usuarios.html";
+    }
 }

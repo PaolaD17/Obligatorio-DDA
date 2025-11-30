@@ -55,3 +55,77 @@ body {
     padding: 15px;
     margin-top: 50px;
 }
+
+.navbar {
+    background: #0f172a;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+}
+
+.nav-links a:hover {
+    background: #2563eb;
+    border-radius: 6px;
+}
+
+/* ---- DROPDOWN ---- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;          /* ✅ pegado al botón */
+    left: 0;
+    background: #1e293b;
+    border-radius: 8px;
+    min-width: 180px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+.dropdown-menu li {
+    width: 100%;
+    list-style: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #2563eb;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+

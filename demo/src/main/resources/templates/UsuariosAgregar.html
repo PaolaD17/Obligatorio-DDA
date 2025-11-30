@@ -25,14 +25,14 @@
     <table border="1" cellpadding="5" style="margin: 0 auto;">
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
+            <th>Nombre completo</th>
             <th>Email</th>
         </tr>
 
         <!-- Thymeleaf con Spring -->
         <tr th:each="u : ${usuarios}">
             <td th:text="${u.id}"></td>
-            <td th:text="${u.nombre}"></td>
+            <td th:text="${u.nombreCompleto}"></td>
             <td th:text="${u.email}"></td>
         </tr>
     </table>
