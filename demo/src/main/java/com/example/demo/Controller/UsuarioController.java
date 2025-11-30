@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    //ESTO ES DE PRUEBA PARA VER SI ANDABA ALGO
     @PostConstruct
     public void init() {
         System.out.println("✅ UsuarioController CARGADO");
