@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">🎬 StreamUp</div>
+        <ul class="nav-links">
+            <li><a href="/usuarios">Usuarios</a></li>
+            <li><a href="/contenidos">Contenidos</a></li>
+            <li><a href="/reproducciones">Reproducciones</a></li>
+            <li><a href="/estadisticas">Estadísticas</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="contenido-principal">
+    <h2>Listado de Usuarios</h2>
+
+    <table border="1" cellpadding="5" style="margin: 0 auto;">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+
+        <!-- Thymeleaf con Spring -->
+        <tr th:each="u : ${usuarios}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.nombre}"></td>
+            <td th:text="${u.email}"></td>
+        </tr>
+    </table>
+
+</main>
+
+<footer class="footer">
+    © 2025 StreamUp. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
