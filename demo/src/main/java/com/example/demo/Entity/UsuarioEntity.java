@@ -35,8 +35,6 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReproduccionEntity> reproducciones = new ArrayList<>();
-    
-    
 
     public int getId() {
         return id;
