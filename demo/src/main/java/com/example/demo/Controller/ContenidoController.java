@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.ContenidoService;
 
 @RestController
-@RequestMapping("Contenidos")
+@RequestMapping("Contenidos/dos")
 public class ContenidoController {
     @Autowired
     private ContenidoService contenidoService;
+
+
+
+
 }
