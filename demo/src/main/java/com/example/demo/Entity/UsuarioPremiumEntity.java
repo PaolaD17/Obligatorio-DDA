@@ -1,12 +1,14 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "Usuario_Premium")
 public class UsuarioPremiumEntity extends UsuarioEntity {
 
     @NotNull(message = "La fecha de inicio de membresía no puede ser nula")
