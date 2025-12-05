@@ -11,7 +11,7 @@ public class HomeController {
     public String home() {
         return "forward:/index.html";
     }
-    
+
     @GetMapping("/contenidos")
     public String contenidos() {
         return "forward:/Contenidos.html";
@@ -19,6 +19,16 @@ public class HomeController {
 
     @GetMapping("/usuarios")
     public String usuarios() {
-        return "forward:/UsuariosListar.html";
+        return "forward:/Usuarios.html";
+    }
+
+    @GetMapping("/usuarios/agregarUsuario")
+    public String agregarUsuario() {
+        return "forward:/UsuariosAgregar.html";
+    }
+
+    @GetMapping("/reproducciones")
+    public String reproducciones() {
+        return "forward:/Reproduccion.html";
     }
 }

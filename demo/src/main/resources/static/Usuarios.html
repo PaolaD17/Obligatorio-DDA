@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Contenidos</title>
+    <title>Usuarios</title>
     <link rel="stylesheet" href="/estilos.css">
 </head>
 
@@ -55,33 +55,25 @@
     </header>
 
     <main class="contenido-principal">
-        <h2>Listado de Contenidos</h2>
+        <h2>Listado de Usuarios</h2>
 
         <table border="1" cellpadding="5" style="margin: 0 auto;">
             <tr>
                 <th>ID</th>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Duración</th>
-                <th>Año de estreno</th>
-                <th>Operación</th>
-                <th>Costo de suscripción</th>
-                <th>Exclusivo para premium</th>
+                <th>Nombre completo</th>
+                <th>Email</th>
+                <th>Fecha de registro</th>
+                <th>Lista de reproducciones</th>
             </tr>
 
-            <tr th:each="c : ${contenidos}">
-                <td th:text="${c.id}"></td>
-                <td th:text="${c.titulo}"></td>
-                <td th:text="${c.descripcion}"></td>
-                <td th:text="${c.categoria}"></td>
-                <td th:text="${c.duracion}"></td>
-                <td th:text="${c.anioEstreno}"></td>
-                <td th:text="${c.tipoOperacion}"></td>
-                <td th:text="${c.precioSuscripcion}"></td>
-                <td th:text="${c.exclusivoPremium}"></td>
+            <!-- Thymeleaf con Spring -->
+            <tr th:each="u : ${Usuarios}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.nombreCompleto}"></td>
+                <td th:text="${u.email}"></td>
             </tr>
         </table>
+
     </main>
 
     <footer class="footer">
@@ -113,4 +105,5 @@
         });
     </script>
 </body>
+
 </html>

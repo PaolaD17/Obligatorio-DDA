@@ -42,6 +42,9 @@ public class ContenidoEntity {
         return anioEstreno <= Year.now().getValue();
     }
 
+    @NotBlank(message = "El tipo de operación no puede estar vacío")
+    private String tipoOperacion;
+    
     @NotNull(message = "El precio de suscripción es obligatorio")
     @DecimalMin("0.0")
     private BigDecimal precioSuscripcion;

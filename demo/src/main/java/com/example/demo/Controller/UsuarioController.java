@@ -3,44 +3,42 @@ package com.example.demo.Controller;
 import com.example.demo.Entity.UsuarioEntity;
 import com.example.demo.Service.UsuarioService;
 
-import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
+
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/usuarios")
+@RestController
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
-
-    //ESTO ES DE PRUEBA PARA VER SI ANDABA ALGO
-    @PostConstruct
-    public void init() {
-        System.out.println("✅ UsuarioController CARGADO");
-    }
-
     @Autowired
     private UsuarioService usuarioService;
 
-    // ✅ LISTAR USUARIOS
-    @GetMapping("/listar")
-    public String listarUsuarios(Model model) {
-        model.addAttribute("usuarios", usuarioService.getUsuarios());
-        return "UsuariosListar";   // ⚠️ SOLO EL NOMBRE, SIN /usuarios/
+    @PostMapping()
+    public UsuarioEntity agregarUsuario(@Valid @RequestBody UsuarioEntity usuario) {
+        return usuarioService.agregarUsuario(usuario);
     }
 
-    // ✅ FORMULARIO NUEVO USUARIO
-    @GetMapping("/nuevo")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("usuarios", new UsuarioEntity());
-        return "UsuariosAgregar"; // ⚠️ SOLO EL NOMBRE
+    @GetMapping()
+    public ArrayList<UsuarioEntity> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
 
-    // ✅ GUARDAR USUARIO
-    @PostMapping("/guardar")
-    public String guardarUsuario(@ModelAttribute UsuarioEntity usuario) {
-        usuarioService.postUsuario(usuario);
-        return "redirect:/usuarios/listar";
+    @GetMapping("/{id}")
+    public UsuarioEntity obtenerUsuario(@PathVariable int id) {
+        return usuarioService.obtenerUsuarioPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarUsuario(@PathVariable int id) {
+        usuarioService.eliminarUsuario(id);
     }
 }

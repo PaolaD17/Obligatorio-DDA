@@ -60,26 +60,20 @@
         <table border="1" cellpadding="5" style="margin: 0 auto;">
             <tr>
                 <th>ID</th>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
+                <th>Usuario</th>
+                <th>Contenido</th>
+                <th>Fecha y hora</th>
                 <th>Duración</th>
-                <th>Año de estreno</th>
-                <th>Operación</th>
-                <th>Costo de suscripción</th>
-                <th>Exclusivo para premium</th>
+                <th>Calificación</th>
             </tr>
 
-            <tr th:each="c : ${contenidos}">
-                <td th:text="${c.id}"></td>
-                <td th:text="${c.titulo}"></td>
-                <td th:text="${c.descripcion}"></td>
-                <td th:text="${c.categoria}"></td>
-                <td th:text="${c.duracion}"></td>
-                <td th:text="${c.anioEstreno}"></td>
-                <td th:text="${c.tipoOperacion}"></td>
-                <td th:text="${c.precioSuscripcion}"></td>
-                <td th:text="${c.exclusivoPremium}"></td>
+            <tr th:each="r : ${reproducciones}">
+                <td th:text="${r.id}"></td>
+                <td th:text="${r.usuario}"></td>
+                <td th:text="${r.contenido}"></td>
+                <td th:text="${r.fechaHora}"></td>
+                <td th:text="${r.duracionMinutos}"></td>
+                <td th:text="${r.calificacion}"></td>
             </tr>
         </table>
     </main>

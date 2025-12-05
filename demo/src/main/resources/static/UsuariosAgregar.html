@@ -1,47 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
     <link rel="stylesheet" href="/estilos.css">
 </head>
+
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="logo">🎬 StreamUp</div>
-        <ul class="nav-links">
-            <li><a href="/usuarios">Usuarios</a></li>
-            <li><a href="/contenidos">Contenidos</a></li>
-            <li><a href="/reproducciones">Reproducciones</a></li>
-            <li><a href="/estadisticas">Estadísticas</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🎬 StreamUp</div>
+            <ul class="nav-links">
+                <!-- HOME -->
+                <li>
+                    <a href="/">Inicio</a>
+                </li>
+                <!-- USUARIOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Usuarios ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/usuarios">Listar Usuarios</a></li>
+                        <li><a href="/usuarios/agregarUsuario">Agregar Usuario</a></li>
+                    </ul>
+                </li>
+                <!-- CONTENIDOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Contenidos ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contenidos">Listar contenidos</a></li>
+                        <li><a href="/contenidos/nuevo">Agregar Contenido</a></li>
+                    </ul>
+                </li>
+                <!-- REPRODUCCIONES -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Reproducciones ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/reproducciones">Listar reproducciones</a></li>
+                        <li><a href="/reproducciones/nuevo">Agregar Reproducción</a></li>
+                    </ul>
+                </li>
+                <!-- ESTADÍSTICAS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Estadísticas ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/estadisticas">Usuarios</a></li>
+                        <li><a href="/estadisticas">Contenidos</a></li>
+                        <li><a href="/estadisticas">Reproducciones</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<main class="contenido-principal">
-    <h2>Listado de Usuarios</h2>
+    <main class="contenido-principal">
+        <h2>Agregar un usuario</h2>
 
-    <table border="1" cellpadding="5" style="margin: 0 auto;">
-        <tr>
-            <th>ID</th>
-            <th>Nombre completo</th>
-            <th>Email</th>
-        </tr>
+        <form id="formUsuario">
+            <label>Nombre completo</label>
+            <input type="text" id="nombre" required>
 
-        <!-- Thymeleaf con Spring -->
-        <tr th:each="u : ${usuarios}">
-            <td th:text="${u.id}"></td>
-            <td th:text="${u.nombreCompleto}"></td>
-            <td th:text="${u.email}"></td>
-        </tr>
-    </table>
+            <label>Email</label>
+            <input type="email" id="email" required>
 
-</main>
+            <label>Fecha de registro</label>
+            <input type="LocalDate" id="LocalDate" required>
 
-<footer class="footer">
-    © 2025 StreamUp. Todos los derechos reservados.
-</footer>
+            <button type="submit">Guardar</button>
+        </form>
 
+    </main>
+
+    <footer class="footer">
+        © 2025 StreamUp. Todos los derechos reservados.
+    </footer>
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                const parent = this.parentElement;
+
+                document.querySelectorAll(".dropdown").forEach(drop => {
+                    if (drop !== parent) {
+                        drop.classList.remove("open");
+                    }
+                });
+                parent.classList.toggle("open");
+            });
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".dropdown")) {
+                document.querySelectorAll(".dropdown").forEach(drop => {
+                    drop.classList.remove("open");
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>

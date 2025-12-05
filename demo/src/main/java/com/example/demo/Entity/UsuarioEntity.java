@@ -16,12 +16,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "El nombre completo no puede estar vacío")
     private String nombreCompleto;
@@ -30,6 +32,7 @@ public class UsuarioEntity {
     @NotBlank(message = "El email no puede estar vacío")
     private String email;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "La fecha de registro no puede ser nula")
     private LocalDate fechaRegistro;
 
@@ -75,13 +78,14 @@ public class UsuarioEntity {
     public void setReproducciones(List<ReproduccionEntity> reproducciones) {
         this.reproducciones = reproducciones;
     }
-    
-    public UsuarioEntity(int id, String nombreCompleto, String email, LocalDate fechaRegistro, List<ReproduccionEntity> reproducciones) {
+
+    public UsuarioEntity(Integer id, String nombreCompleto, String email, LocalDate fechaRegistro,
+            List<ReproduccionEntity> reproducciones) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.email = email;
         this.fechaRegistro = fechaRegistro;
-        this.reproducciones = reproducciones;
+        this.reproducciones = new ArrayList<>();
     }
 
     public UsuarioEntity() {
@@ -89,6 +93,7 @@ public class UsuarioEntity {
 
     @Override
     public String toString() {
-        return "Usuario: " + id + "\nNombre completo: " + nombreCompleto + "\nE-Mail: " + email + "\nFecha de registro: " + fechaRegistro + "\nReproducciones: " + reproducciones;
+        return "Usuario: " + id + "\nNombre completo: " + nombreCompleto + "\nE-Mail: " + email
+                + "\nFecha de registro: " + fechaRegistro + "\nReproducciones: " + reproducciones;
     }
 }

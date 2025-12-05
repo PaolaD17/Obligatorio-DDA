@@ -1,11 +1,17 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entity.UsuarioEntity;
-import java.util.List;
+
+import java.util.ArrayList;
 
 public interface UsuarioService {
 
-    List<UsuarioEntity> getUsuarios();
+    public UsuarioEntity agregarUsuario(UsuarioEntity usuario);
 
-    UsuarioEntity postUsuario(UsuarioEntity usuario);
+    public ArrayList<UsuarioEntity> listarUsuarios();
+
+    public UsuarioEntity obtenerUsuarioPorId(int id);
+
+    public void eliminarUsuario(int id);
+    
 }
