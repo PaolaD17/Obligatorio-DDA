@@ -35,4 +35,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void eliminarUsuario(int id) {
         usuarioRepository.deleteById(id);
     }
+
+    @Override
+    public UsuarioEntity modificarUsuario(UsuarioEntity usuario, int id) {
+        UsuarioEntity UExistente = usuarioRepository.findById(id).orElse(null);
+        if (UExistente != null) {
+            UExistente.setNombreCompleto(usuario.getNombreCompleto());
+            UExistente.setEmail(usuario.getEmail());
+            UExistente.setFechaRegistro(usuario.getFechaRegistro());
+            
+            return usuarioRepository.save(UExistente);
+        }
+        return null;
+    }
 }

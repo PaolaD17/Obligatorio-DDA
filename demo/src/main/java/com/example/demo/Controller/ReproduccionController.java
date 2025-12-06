@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,10 @@ public class ReproduccionController {
     @DeleteMapping("/{id}")
     public void eliminarReproduccion(@PathVariable int id) {
         reproduccionService.eliminarReproduccion(id);
+    }
+
+    @PutMapping("/{id}")
+    public ReproduccionEntity modificarReproduccion(@PathVariable int id, @RequestBody ReproduccionEntity reproduccion) {
+        return reproduccionService.modificarReproduccion(reproduccion, id);
     }
 }

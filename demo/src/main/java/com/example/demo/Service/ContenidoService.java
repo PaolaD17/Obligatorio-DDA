@@ -12,4 +12,6 @@ public interface ContenidoService {
     public ContenidoEntity obtenerContenidoPorId(int id);
 
     public void eliminarContenido(int id);
+
+    public ContenidoEntity modificarContenido(ContenidoEntity contenido, int id);
 }

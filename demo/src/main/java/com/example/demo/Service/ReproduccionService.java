@@ -12,4 +12,6 @@ public interface ReproduccionService {
     public ReproduccionEntity obtenerReproduccionPorId(int id);
 
     public void eliminarReproduccion(int id);
+
+    public ReproduccionEntity modificarReproduccion(ReproduccionEntity reproduccion, int id);
 }

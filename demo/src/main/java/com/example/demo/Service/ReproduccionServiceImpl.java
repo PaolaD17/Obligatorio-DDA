@@ -35,4 +35,19 @@ public class ReproduccionServiceImpl implements ReproduccionService {
     public void eliminarReproduccion(int id) {
         reproduccionRepository.deleteById(id);
     }
+
+    @Override
+    public ReproduccionEntity modificarReproduccion(ReproduccionEntity reproduccion, int id) {
+        ReproduccionEntity CExistente = reproduccionRepository.findById(id).orElse(null);
+        if (CExistente != null) {
+            CExistente.setUsuario(reproduccion.getUsuario());
+            CExistente.setContenido(reproduccion.getContenido());
+            CExistente.setFechaHora(reproduccion.getFechaHora());
+            CExistente.setDuracionMinutos(reproduccion.getDuracionMinutos());
+            CExistente.setCalificacion(reproduccion.getCalificacion());
+
+            return reproduccionRepository.save(CExistente);
+        }
+        return null;
+    }
 }

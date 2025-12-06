@@ -106,6 +106,14 @@ public class ContenidoEntity {
         this.anioEstreno = anioEstreno;
     }
 
+    public String getTipoOperacion() {
+        return tipoOperacion;
+    }
+
+    public void setTipoOperacion(String tipoOperacion) {
+        this.tipoOperacion = tipoOperacion;
+    }
+
     public BigDecimal getPrecioSuscripcion() {
         return precioSuscripcion;
     }
@@ -136,6 +144,14 @@ public class ContenidoEntity {
 
     public void setReproducciones(List<ReproduccionEntity> reproducciones) {
         this.reproducciones = reproducciones;
+    }
+
+    public boolean isExclusivoPremium() {
+        return exclusivoPremium;
+    }
+
+    public void setExclusivoPremium(boolean exclusivoPremium) {
+        this.exclusivoPremium = exclusivoPremium;
     }
 
     public ContenidoEntity(int id, String titulo, String descripcion, String categoria, int duracion,
