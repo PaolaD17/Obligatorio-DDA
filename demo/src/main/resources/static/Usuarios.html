@@ -58,20 +58,22 @@
         <h2>Listado de Usuarios</h2>
 
         <table border="1" cellpadding="5" style="margin: 0 auto;">
-            <tr>
-                <th>ID</th>
-                <th>Nombre completo</th>
-                <th>Email</th>
-                <th>Fecha de registro</th>
-                <th>Lista de reproducciones</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre completo</th>
+                    <th>Email</th>
+                    <th>Fecha de registro</th>
+                    <th>Tipo de usuario</th>
+                    <th>Fecha de inicio de membresía</th>
+                    <th>Reproducciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-            <!-- Thymeleaf con Spring -->
-            <tr th:each="u : ${Usuarios}">
-                <td th:text="${u.id}"></td>
-                <td th:text="${u.nombreCompleto}"></td>
-                <td th:text="${u.email}"></td>
-            </tr>
+            <tbody id="tablaUsuarios"></tbody>
+        </table>
+
         </table>
 
     </main>
@@ -103,6 +105,47 @@
                 });
             }
         });
+
+        fetch("http://localhost:8080/api/usuarios")
+            .then(response => response.json())
+            .then(data => {
+                const tabla = document.getElementById("tablaUsuarios");
+                tabla.innerHTML = "";
+
+                data.forEach(usuario => {
+                    const fila = document.createElement("tr");
+
+                    fila.innerHTML = `
+                <td>${usuario.id}</td>
+                <td>${usuario.nombreCompleto}</td>
+                <td>${usuario.email}</td>
+                <td>${usuario.fechaRegistro}</td>
+                <td>${usuario.fechaInicioMembresia ? "Premium" : "Estándar"}</td>
+                <td>${usuario.fechaInicioMembresia ?? "-"}</td>
+                <td>${usuario.reproducciones ? usuario.reproducciones.length : 0}</td>
+                <td>
+                    <button onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+                    <button onclick="editarUsuario(${usuario.id})">Editar</button>
+                </td>
+            `;
+
+                    tabla.appendChild(fila);
+                });
+            })
+            .catch(error => console.error("Error al cargar usuarios:", error));
+
+        function eliminarUsuario(id) {
+            if (!confirm("¿Seguro que deseas eliminar este usuario?")) return;
+
+            fetch(`http://localhost:8080/api/usuarios/${id}`, {
+                method: "DELETE"
+            })
+                .then(() => location.reload());
+        }
+
+        function editarUsuario(id) {
+            window.location.href = `/usuarios/editar/${id}`;
+        }
     </script>
 </body>
 

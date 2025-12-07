@@ -1,12 +1,13 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.UsuarioDTO;
 import com.example.demo.Entity.UsuarioEntity;
 
 import java.util.ArrayList;
 
 public interface UsuarioService {
 
-    public UsuarioEntity agregarUsuario(UsuarioEntity usuario);
+    public UsuarioEntity agregarUsuario(UsuarioDTO dto);
 
     public ArrayList<UsuarioEntity> listarUsuarios();
 

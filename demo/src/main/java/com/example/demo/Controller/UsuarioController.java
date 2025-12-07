@@ -3,9 +3,9 @@ package com.example.demo.Controller;
 import com.example.demo.Entity.UsuarioEntity;
 import com.example.demo.Service.UsuarioService;
 
-import jakarta.validation.Valid;
-
 import java.util.ArrayList;
+
+import com.example.demo.DTO.UsuarioDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,8 +24,8 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping()
-    public UsuarioEntity agregarUsuario(@Valid @RequestBody UsuarioEntity usuario) {
-        return usuarioService.agregarUsuario(usuario);
+    public UsuarioEntity agregarUsuario(@RequestBody UsuarioDTO dto) {
+        return usuarioService.agregarUsuario(dto);
     }
 
     @GetMapping()

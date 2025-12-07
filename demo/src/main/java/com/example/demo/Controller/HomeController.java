@@ -1,12 +1,21 @@
 package com.example.demo.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.Service.UsuarioService;
+
+import org.springframework.ui.Model;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("")
     public String home() {
         return "forward:/index.html";
@@ -23,7 +32,8 @@ public class HomeController {
     }
 
     @GetMapping("/usuarios")
-    public String usuarios() {
+    public String listarUsuarios(Model model) {
+        model.addAttribute("Usuarios", usuarioService.listarUsuarios());
         return "forward:/Usuarios.html";
     }
 

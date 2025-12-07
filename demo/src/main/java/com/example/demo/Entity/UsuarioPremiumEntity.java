@@ -18,6 +18,29 @@ public class UsuarioPremiumEntity extends UsuarioEntity {
 
     private boolean accesoExclusivo = true; // Acceso fijo a contenidos exclusivos
 
+    public LocalDate getFechaInicioMembresia() {
+        return fechaInicioMembresia;
+    }
+
+    public void setFechaInicioMembresia(LocalDate fechaInicioMembresia) {
+        this.fechaInicioMembresia = fechaInicioMembresia;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
+    }
+
+    public boolean isAccesoExclusivo() {
+        return accesoExclusivo;
+    }
+
+    public void setAccesoExclusivo(boolean accesoExclusivo) {
+        this.accesoExclusivo = accesoExclusivo;
+    }
     public UsuarioPremiumEntity(int id, String nombreCompleto, String email, LocalDate fechaRegistro, LocalDate fechaInicioMembresia, List<ReproduccionEntity> reproducciones) {
         super(id, nombreCompleto, email, fechaRegistro, reproducciones);
         this.fechaInicioMembresia = fechaInicioMembresia;

@@ -16,8 +16,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioEntity {
@@ -32,7 +30,6 @@ public class UsuarioEntity {
     @NotBlank(message = "El email no puede estar vacío")
     private String email;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "La fecha de registro no puede ser nula")
     private LocalDate fechaRegistro = LocalDate.now();
 

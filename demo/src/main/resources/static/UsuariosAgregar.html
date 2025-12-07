@@ -64,9 +64,8 @@
             <input type="email" id="email" required>
 
             <label>Fecha de registro</label>
-            <input type="date" id="fechaRegistro" required readonly>
+            <input type="date" id="fechaRegistro" placeholder="dd-MM-yyyy" required>
 
-            <!-- TIPO DE USUARIO -->
             <label>Tipo de usuario</label>
             <select id="tipoUsuario" required>
                 <option value="" selected disabled>Seleccionar una opción...</option>
@@ -74,7 +73,6 @@
                 <option value="PREMIUM">Premium</option>
             </select>
 
-            <!-- CAMPO SOLO PARA PREMIUM -->
             <div id="campoPremium" class="campo-premium oculto">
                 <label>Fecha inicio membresía</label>
                 <input type="date" id="fechaMembresia">
@@ -130,6 +128,48 @@
                 fechaMembresia.required = false;
                 fechaMembresia.value = "";
             }
+        });
+
+        const formulario = document.getElementById("formUsuario");
+
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const usuario = {
+                nombreCompleto: document.getElementById("nombre").value,
+                email: document.getElementById("email").value,
+                fechaRegistro: document.getElementById("fechaRegistro").value,
+                tipoUsuario: document.getElementById("tipoUsuario").value,
+                fechaMembresia: document.getElementById("tipoUsuario").value === "PREMIUM"
+                    ? document.getElementById("fechaMembresia").value
+                    : null
+            };
+
+            fetch("http://localhost:8080/api/usuarios", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(usuario)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Usuario agregado correctamente");
+                    window.location.href = "/Usuarios.html";
+                    document.getElementById("fechaRegistro").value = new Date().toISOString().split("T")[0];
+                    document.getElementById("campoPremium").classList.add("oculto");
+                })
+                .catch(error => {
+                    alert("Error al guardar usuario");
+                });
+
         });
     </script>
 </body>
