@@ -39,7 +39,8 @@ public class HomeController {
     }
 
     @GetMapping("/contenidos/modificar/{id}")
-    public String contenidosModificar(@PathVariable int id, ContenidoEntity contenidoEntity) {
+    public String contenidosModificar(@PathVariable int id, Model model) {
+        model.addAttribute("contenidoId", id); // pasar el ID al HTML
         return "forward:/ContenidosModificar.html";
     }
 
