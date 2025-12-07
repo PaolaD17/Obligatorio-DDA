@@ -31,6 +31,11 @@ public class HomeController {
         return "redirect:/ContenidosAgregar.html";
     }
 
+    @GetMapping("/contenidos/detalle")
+    public String contenidosDetalle() {
+        return "forward:/ContenidoDetalle.html";
+    }
+
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
         model.addAttribute("Usuarios", usuarioService.listarUsuarios());

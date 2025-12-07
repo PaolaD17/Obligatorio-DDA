@@ -1,14 +1,11 @@
+// Dropdowns
 const dropdowns = document.querySelectorAll(".dropdown-btn");
 dropdowns.forEach(btn => {
     btn.addEventListener("click", function (e) {
         e.preventDefault();
-
         const parent = this.parentElement;
-
         document.querySelectorAll(".dropdown").forEach(drop => {
-            if (drop !== parent) {
-                drop.classList.remove("open");
-            }
+            if (drop !== parent) drop.classList.remove("open");
         });
         parent.classList.toggle("open");
     });
@@ -16,17 +13,16 @@ dropdowns.forEach(btn => {
 
 document.addEventListener("click", function (e) {
     if (!e.target.closest(".dropdown")) {
-        document.querySelectorAll(".dropdown").forEach(drop => {
-            drop.classList.remove("open");
-        });
+        document.querySelectorAll(".dropdown").forEach(drop => drop.classList.remove("open"));
     }
 });
 
+// Listado de contenidos
 fetch("http://localhost:8080/api/contenidos")
     .then(response => response.json())
     .then(data => {
         const cuerpo = document.getElementById("tablaCuerpo");
-        cuerpo.innerHTML = ""; // Limpiamos solo el cuerpo
+        cuerpo.innerHTML = "";
 
         data.forEach(contenido => {
             const fila = document.createElement("tr");
@@ -54,11 +50,10 @@ fetch("http://localhost:8080/api/contenidos")
             `;
             cuerpo.appendChild(fila);
         });
-
     })
-    .catch(error => console.error("Error al cargar contenidos:", error));
+    .catch(err => console.error("Error al cargar contenidos:", err));
 
-
+// Funciones de acciones
 function eliminarContenido(id) {
     if (!confirm("¿Seguro que deseas eliminar este contenido?")) return;
 
@@ -71,3 +66,29 @@ function eliminarContenido(id) {
 function editarContenido(id) {
     window.location.href = `/contenidos/editar/${id}`;
 }
+
+// Listado simple
+fetch("http://localhost:8080/api/contenidos")
+    .then(res => res.json())
+    .then(data => {
+        const cuerpo = document.getElementById("tablaCuerpo");
+        cuerpo.innerHTML = "";
+        data.forEach(contenido => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td>${contenido.id}</td>
+                <td>${contenido.titulo}</td>
+                <td>
+                    <button onclick="verDetalle(${contenido.id})">Detalle</button>
+                </td>
+            `;
+            cuerpo.appendChild(fila);
+        });
+    })
+    .catch(err => console.error(err));
+
+function verDetalle(id) {
+    // Redirige a la página de detalle
+    window.location.href = `/contenidos/detalle?id=${id}`;
+}
+

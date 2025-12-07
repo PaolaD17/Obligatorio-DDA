@@ -2,8 +2,11 @@ package com.example.demo.Controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,21 +37,27 @@ public class ContenidoController {
             @RequestParam("categoria") String categoria,
             @RequestParam("duracion") int duracion,
             @RequestParam("anioEstreno") int anioEstreno,
-            @RequestParam("precioSuscripcion") BigDecimal precio,
+            @RequestParam("precioSuscripcion") BigDecimal precioSuscripcion,
+            @RequestParam("tipoOperacion") String tipoOperacion,
+            @RequestParam("exclusivoPremium") boolean exclusivoPremium,
             @RequestParam("portada") MultipartFile portada,
             @RequestParam("trailer") MultipartFile trailer) {
 
         try {
+            // Subir archivos y obtener URLs
             String portadaUrl = uploadthingService.uploadFile(portada);
             String trailerUrl = uploadthingService.uploadFile(trailer);
 
+            // Crear objeto Contenido
             ContenidoEntity contenido = new ContenidoEntity();
             contenido.setTitulo(titulo);
             contenido.setDescripcion(descripcion);
             contenido.setCategoria(categoria);
             contenido.setDuracion(duracion);
             contenido.setAnioEstreno(anioEstreno);
-            contenido.setPrecioSuscripcion(precio);
+            contenido.setPrecioSuscripcion(precioSuscripcion);
+            contenido.setTipoOperacion(tipoOperacion);
+            contenido.setExclusivoPremium(exclusivoPremium);
             contenido.setPortadaUrl(portadaUrl);
             contenido.setTrailerUrl(trailerUrl);
 
@@ -56,7 +65,7 @@ public class ContenidoController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            throw new RuntimeException("Error al subir archivos: " + e.getMessage());
         }
     }
 

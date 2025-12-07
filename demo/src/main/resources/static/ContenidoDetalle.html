@@ -54,28 +54,36 @@
         </nav>
     </header>
 
-    <main class="contenido-principal">
-        <h2>Listado de Contenidos</h2>
+    <main class="detalle-contenido">
+        <div class="acciones">
+            <button id="modificarBtn">Modificar</button>
+            <button id="eliminarBtn">Eliminar</button>
+        </div>
 
-        <table id="tablaContenidos" border="1" cellpadding="5" style="margin: 0 auto;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tablaCuerpo">
-                <!-- Se llenará dinámicamente -->
-            </tbody>
-        </table>
+        <h2 id="titulo"></h2>
 
+        <div class="info">
+            <p><strong>Descripción:</strong> <span id="descripcion"></span></p>
+            <p><strong>Categoría:</strong> <span id="categoria"></span></p>
+            <p><strong>Duración:</strong> <span id="duracion"></span> minutos</p>
+            <p><strong>Año de estreno:</strong> <span id="anioEstreno"></span></p>
+            <p><strong>Operación:</strong> <span id="tipoOperacion"></span></p>
+            <p><strong>Precio suscripción:</strong> $<span id="precioSuscripcion"></span></p>
+            <p><strong>Exclusivo Premium:</strong> <span id="exclusivoPremium"></span></p>
+        </div>
+
+        <div class="media">
+            <img id="portada" alt="Portada">
+            <video id="trailer" controls>
+                <source id="trailerSrc" type="video/mp4">
+            </video>
+        </div>
     </main>
 
     <footer class="footer">
         © 2025 StreamUp. Todos los derechos reservados.
     </footer>
-    <script src="/js/Contenidos.js"></script>
+    <script src="/js/ContenidoDetalle.js"></script>
 </body>
 
 </html>

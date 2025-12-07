@@ -225,3 +225,98 @@ body {
     opacity: 1;
     pointer-events: auto;
 }
+/* Contenedor principal */
+.detalle-contenido {
+    max-width: 800px;
+    margin: 50px auto; /* centra horizontal y agrega espacio arriba */
+    padding: 20px;
+    background-color: #f9f9f9; /* fondo suave */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Botones de acción */
+.detalle-contenido .acciones {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.detalle-contenido button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.detalle-contenido button:hover {
+    background-color: #ff4c4c;
+}
+
+/* Título */
+.detalle-contenido h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Información */
+.detalle-contenido .info p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* Imagen y video */
+.detalle-contenido .media {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.detalle-contenido .media img {
+    width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px; /* espacio debajo de la imagen */
+}
+
+.detalle-contenido .media video {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+/* Botones de acción */
+.detalle-contenido .acciones {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.detalle-contenido button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+/* Botón Modificar - amarillo */
+#modificarBtn {
+    background-color: #f1c40f;
+}
+
+#modificarBtn:hover {
+    background-color: #d4ac0d;
+}
+
+/* Botón Eliminar - rojo */
+#eliminarBtn {
+    background-color: #e74c3c;
+}
+
+#eliminarBtn:hover {
+    background-color: #c0392b;
+}
