@@ -225,77 +225,26 @@ body {
     opacity: 1;
     pointer-events: auto;
 }
-/* Contenedor principal */
 .detalle-contenido {
-    max-width: 800px;
-    margin: 50px auto; /* centra horizontal y agrega espacio arriba */
-    padding: 20px;
-    background-color: #f9f9f9; /* fondo suave */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     font-family: Arial, sans-serif;
 }
 
-/* Botones de acción */
+/* Botones de acción alineados a la derecha */
 .detalle-contenido .acciones {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* espacio entre botones */
     margin-bottom: 20px;
 }
 
 .detalle-contenido button {
     padding: 8px 16px;
-    margin-left: 10px;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.detalle-contenido button:hover {
-    background-color: #ff4c4c;
-}
-
-/* Título */
-.detalle-contenido h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Información */
-.detalle-contenido .info p {
-    margin: 8px 0;
-    font-size: 16px;
-}
-
-/* Imagen y video */
-.detalle-contenido .media {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.detalle-contenido .media img {
-    width: 300px;
-    border-radius: 10px;
-    margin-bottom: 20px; /* espacio debajo de la imagen */
-}
-
-.detalle-contenido .media video {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-}
-
-/* Botones de acción */
-.detalle-contenido .acciones {
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.detalle-contenido button {
-    padding: 8px 16px;
-    margin-left: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -319,4 +268,40 @@ body {
 
 #eliminarBtn:hover {
     background-color: #c0392b;
+}
+
+/* Título centrado */
+.detalle-contenido h2 {
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Información */
+.detalle-contenido .info p {
+    align-items: center;
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+/* Imagen y video en columna centrada */
+.detalle-contenido .media {
+    display: flex;
+    flex-direction: column; /* vertical */
+    align-items: center;
+    margin-top: 30px;
+}
+
+.detalle-contenido .media img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.detalle-contenido .media video {
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
 }
