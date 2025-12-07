@@ -64,3 +64,25 @@ formulario.addEventListener("submit", function (e) {
             console.error(error);
         });
 });
+
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+  const portada = document.getElementById("portadaFile").files[0];
+  const trailer = document.getElementById("trailerFile").files[0];
+
+  if (!portada || !trailer) {
+    alert("Selecciona ambos archivos");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("portada", portada);
+  formData.append("trailer", trailer);
+
+  const res = await fetch("/api/upload/media", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  console.log("Archivos subidos:", data);
+});

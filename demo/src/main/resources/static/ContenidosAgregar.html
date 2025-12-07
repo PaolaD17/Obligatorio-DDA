@@ -87,11 +87,13 @@
                 Exclusivo Premium
             </label>
 
-            <label>Portada</label>
-            <input type="text" id="portadaUrl" required>
+            <label>Portada (Imagen)</label>
+            <input type="file" id="portadaFile" accept="image/*" required>
 
-            <label>Trailer</label>
-            <input type="text" id="trailerUrl" required>
+            <label>Trailer (Video)</label>
+            <input type="file" id="trailerFile" accept="video/*" required>
+
+            <button id="uploadBtn">Subir</button>
 
             <button type="submit">Agregar</button>
         </form>

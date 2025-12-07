@@ -40,6 +40,13 @@ fetch("http://localhost:8080/api/contenidos")
                 <td>${contenido.tipoOperacion}</td>
                 <td>$${contenido.precioSuscripcion}</td>
                 <td>${contenido.exclusivoPremium ? 'Sí' : 'No'}</td>
+                <td><img src="${contenido.portadaUrl}" alt="Portada" width="100"></td>
+                <td>
+                    <video width="150" controls>
+                        <source src="${contenido.trailerUrl}" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </td>
                 <td>
                     <button onclick="eliminarContenido(${contenido.id})">Eliminar</button>
                     <button onclick="editarContenido(${contenido.id})">Editar</button>
@@ -47,6 +54,7 @@ fetch("http://localhost:8080/api/contenidos")
             `;
             cuerpo.appendChild(fila);
         });
+
     })
     .catch(error => console.error("Error al cargar contenidos:", error));
 
