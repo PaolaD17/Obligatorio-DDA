@@ -229,7 +229,7 @@ body {
     max-width: 700px;
     margin: 50px auto;
     padding: 30px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     font-family: Arial, sans-serif;
@@ -238,36 +238,55 @@ body {
 /* Botones de acción alineados a la derecha */
 .detalle-contenido .acciones {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px; /* espacio entre botones */
-    margin-bottom: 20px;
+    justify-content: center;   
+    gap: 15px;                 
+    margin-top: 40px;          
+    margin-bottom: 0;          
 }
 
 .detalle-contenido button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;              /* ✅ elimina cualquier borde */
+    border-radius: 6px;        /* mantiene esquinas redondeadas */
+    transition: transform 0.2s ease;
+}
+
+#modificarBtn::before {
+    content: "✏️";
+}
+
+#eliminarBtn::before {
+    content: "🗑️";
+}
+
+.detalle-contenido button {
+    transition: transform 0.2s ease;
+}
+
+.detalle-contenido button:hover {
+    transform: scale(1.05);
 }
 
 /* Botón Modificar - amarillo */
 #modificarBtn {
-    background-color: #f1c40f;
+    background-color: rgba(248, 248, 48, 0.925);
 }
 
 #modificarBtn:hover {
-    background-color: #d4ac0d;
+    background-color: yellow;
 }
 
 /* Botón Eliminar - rojo */
 #eliminarBtn {
-    background-color: #e74c3c;
+    background-color: rgba(255, 0, 0, 0.884);
 }
 
 #eliminarBtn:hover {
-    background-color: #c0392b;
+    background-color: red;
 }
 
 /* Título centrado */
@@ -279,9 +298,10 @@ body {
 
 /* Información */
 .detalle-contenido .info p {
-    align-items: center;
-    margin: 6px 0;
-    font-size: 16px;
+    width: 100%;
+    max-width: 500px;
+    margin: 6px auto;
+    text-align: center;
 }
 
 /* Imagen y video en columna centrada */
@@ -304,4 +324,11 @@ body {
     width: 100%;
     max-width: 400px;
     border-radius: 10px;
+}
+
+.detalle-contenido .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }

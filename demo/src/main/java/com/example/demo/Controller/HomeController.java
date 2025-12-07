@@ -3,8 +3,10 @@ package com.example.demo.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.Entity.ContenidoEntity;
 import com.example.demo.Service.UsuarioService;
 
 import org.springframework.ui.Model;
@@ -34,6 +36,11 @@ public class HomeController {
     @GetMapping("/contenidos/detalle")
     public String contenidosDetalle() {
         return "forward:/ContenidoDetalle.html";
+    }
+
+    @GetMapping("/contenidos/modificar/{id}")
+    public String contenidosModificar(@PathVariable int id, ContenidoEntity contenidoEntity) {
+        return "forward:/ContenidosModificar.html";
     }
 
     @GetMapping("/usuarios")
