@@ -56,7 +56,7 @@
 
     <main class="contenido-principal">
         <h2 class="titulo-formulario">Agregar Contenido</h2>
-        <form id="formUsuario" class="formulario">
+        <form id="formContenido" class="formulario">
             <label>Título</label>
             <input type="text" id="titulo" required>
 
@@ -72,7 +72,6 @@
             <label>Año de estreno</label>
             <input type="number" id="anioEstreno" required>
 
-            <!-- TIPO DE OPERACIÓN -->
             <label>Tipo de operación</label>
             <select id="tipoOperacion" required>
                 <option value="" selected disabled>Seleccionar una opción...</option>
@@ -82,6 +81,11 @@
 
             <label>Costo de suscripción</label>
             <input type="number" id="precioSuscripcion" required>
+
+            <label class="checkbox-label">
+                <input type="checkbox" id="exclusivoPremium">
+                Exclusivo Premium
+            </label>
 
             <label>Portada</label>
             <input type="text" id="portadaUrl" required>
@@ -119,6 +123,49 @@
                     drop.classList.remove("open");
                 });
             }
+        });
+
+        const formulario = document.getElementById("formContenido");
+
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const contenido = {
+                titulo: document.getElementById("titulo").value,
+                descripcion: document.getElementById("descripcion").value,
+                categoria: document.getElementById("categoria").value,
+                duracion: document.getElementById("duracion").value,
+                anioEstreno: document.getElementById("anioEstreno").value,
+                tipoOperacion: document.getElementById("tipoOperacion").value,
+                precioSuscripcion: document.getElementById("precioSuscripcion").value,
+                portadaUrl: document.getElementById("portadaUrl").value,
+                trailerUrl: document.getElementById("trailerUrl").value,
+                exclusivoPremium: document.getElementById("exclusivoPremium").checked
+            };
+
+            fetch("http://localhost:8080/api/contenidos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(contenido)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Contenido agregado correctamente");
+                    window.location.href = "/contenidos";
+                })
+                .catch(error => {
+                    alert("Error al guardar contenido" + error.message);
+                    console.error(error);
+                });
         });
     </script>
 </body>

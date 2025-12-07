@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotNull;
 public class ContenidoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     
     @NotBlank(message = "El título no puede estar vacío")
     private String titulo;
@@ -58,11 +58,11 @@ public class ContenidoEntity {
     
     private boolean exclusivoPremium = false;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -154,9 +154,8 @@ public class ContenidoEntity {
         this.exclusivoPremium = exclusivoPremium;
     }
 
-    public ContenidoEntity(int id, String titulo, String descripcion, String categoria, int duracion,
+    public ContenidoEntity(String titulo, String descripcion, String categoria, int duracion,
             int anioEstreno, BigDecimal precioSuscripcion, String portadaUrl, String trailerUrl, List<ReproduccionEntity> reproducciones, boolean exclusivoPremium) {
-        this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;

@@ -57,30 +57,24 @@
     <main class="contenido-principal">
         <h2>Listado de Contenidos</h2>
 
-        <table border="1" cellpadding="5" style="margin: 0 auto;">
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Duración</th>
-                <th>Año de estreno</th>
-                <th>Operación</th>
-                <th>Costo de suscripción</th>
-                <th>Exclusivo para premium</th>
-            </tr>
-
-            <tr th:each="c : ${contenidos}">
-                <td th:text="${c.id}"></td>
-                <td th:text="${c.titulo}"></td>
-                <td th:text="${c.descripcion}"></td>
-                <td th:text="${c.categoria}"></td>
-                <td th:text="${c.duracion}"></td>
-                <td th:text="${c.anioEstreno}"></td>
-                <td th:text="${c.tipoOperacion}"></td>
-                <td th:text="${c.precioSuscripcion}"></td>
-                <td th:text="${c.exclusivoPremium}"></td>
-            </tr>
+        <table id="tablaContenidos" border="1" cellpadding="5" style="margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Duración</th>
+                    <th>Año de estreno</th>
+                    <th>Operación</th>
+                    <th>Costo de suscripción</th>
+                    <th>Exclusivo para premium</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaCuerpo">
+                <!-- Aquí se insertarán las filas dinámicamente -->
+            </tbody>
         </table>
     </main>
 
@@ -111,6 +105,49 @@
                 });
             }
         });
+
+        fetch("http://localhost:8080/api/contenidos")
+            .then(response => response.json())
+            .then(data => {
+                const cuerpo = document.getElementById("tablaCuerpo");
+                cuerpo.innerHTML = ""; // Limpiamos solo el cuerpo
+
+                data.forEach(contenido => {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                <td>${contenido.id}</td>
+                <td>${contenido.titulo}</td>
+                <td>${contenido.descripcion}</td>
+                <td>${contenido.categoria}</td>
+                <td>${contenido.duracion}</td>
+                <td>${contenido.anioEstreno}</td>
+                <td>${contenido.tipoOperacion}</td>
+                <td>$${contenido.precioSuscripcion}</td>
+                <td>${contenido.exclusivoPremium ? 'Sí' : 'No'}</td>
+                <td>
+                    <button onclick="eliminarContenido(${contenido.id})">Eliminar</button>
+                    <button onclick="editarContenido(${contenido.id})">Editar</button>
+                </td>
+            `;
+                    cuerpo.appendChild(fila);
+                });
+            })
+            .catch(error => console.error("Error al cargar contenidos:", error));
+
+
+        function eliminarContenido(id) {
+            if (!confirm("¿Seguro que deseas eliminar este contenido?")) return;
+
+            fetch(`http://localhost:8080/api/contenidos/${id}`, {
+                method: "DELETE"
+            })
+                .then(() => location.reload());
+        }
+
+        function editarContenido(id) {
+            window.location.href = `/contenidos/editar/${id}`;
+        }
     </script>
 </body>
+
 </html>
