@@ -22,7 +22,7 @@
                     <a href="#" class="dropdown-btn">Usuarios ▾</a>
                     <ul class="dropdown-menu">
                         <li><a href="/usuarios">Listar Usuarios</a></li>
-                        <li><a href="/usuarios/agregarUsuario">Agregar Usuario</a></li>
+                        <li><a href="/usuarios/nuevo">Agregar Usuario</a></li>
                     </ul>
                 </li>
                 <!-- CONTENIDOS -->
@@ -55,9 +55,8 @@
     </header>
 
     <main class="contenido-principal">
-        <h2>Agregar un usuario</h2>
-
-        <form id="formUsuario">
+        <h2 class="titulo-formulario">Agregar un usuario</h2>
+        <form id="formUsuario" class="formulario">
             <label>Nombre completo</label>
             <input type="text" id="nombre" required>
 
@@ -65,11 +64,24 @@
             <input type="email" id="email" required>
 
             <label>Fecha de registro</label>
-            <input type="LocalDate" id="LocalDate" required>
+            <input type="date" id="fechaRegistro" required readonly>
 
-            <button type="submit">Guardar</button>
+            <!-- TIPO DE USUARIO -->
+            <label>Tipo de usuario</label>
+            <select id="tipoUsuario" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+                <option value="ESTANDAR">Estándar</option>
+                <option value="PREMIUM">Premium</option>
+            </select>
+
+            <!-- CAMPO SOLO PARA PREMIUM -->
+            <div id="campoPremium" class="campo-premium oculto">
+                <label>Fecha inicio membresía</label>
+                <input type="date" id="fechaMembresia">
+            </div>
+
+            <button type="submit">Agregar</button>
         </form>
-
     </main>
 
     <footer class="footer">
@@ -97,6 +109,26 @@
                 document.querySelectorAll(".dropdown").forEach(drop => {
                     drop.classList.remove("open");
                 });
+            }
+        });
+
+        const hoy = new Date().toISOString().split("T")[0];
+        document.getElementById("fechaRegistro").value = hoy;
+
+        const tipoUsuario = document.getElementById("tipoUsuario");
+        const campoPremium = document.getElementById("campoPremium");
+        const fechaMembresia = document.getElementById("fechaMembresia");
+
+        tipoUsuario.addEventListener("change", function () {
+            if (this.value === "PREMIUM") {
+                campoPremium.classList.remove("oculto");
+                campoPremium.classList.add("visible");
+                fechaMembresia.required = true;
+            } else {
+                campoPremium.classList.remove("visible");
+                campoPremium.classList.add("oculto");
+                fechaMembresia.required = false;
+                fechaMembresia.value = "";
             }
         });
     </script>

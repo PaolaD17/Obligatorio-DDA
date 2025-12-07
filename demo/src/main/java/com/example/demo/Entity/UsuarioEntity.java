@@ -34,7 +34,7 @@ public class UsuarioEntity {
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "La fecha de registro no puede ser nula")
-    private LocalDate fechaRegistro;
+    private LocalDate fechaRegistro = LocalDate.now();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReproduccionEntity> reproducciones = new ArrayList<>();

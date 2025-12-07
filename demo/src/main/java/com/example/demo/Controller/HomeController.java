@@ -17,18 +17,28 @@ public class HomeController {
         return "forward:/Contenidos.html";
     }
 
+    @GetMapping("/contenidos/nuevo")
+    public String nuevoContenido() {
+        return "redirect:/ContenidosAgregar.html";
+    }
+
     @GetMapping("/usuarios")
     public String usuarios() {
         return "forward:/Usuarios.html";
     }
 
-    @GetMapping("/usuarios/agregarUsuario")
-    public String agregarUsuario() {
-        return "forward:/UsuariosAgregar.html";
+    @GetMapping("/usuarios/nuevo")
+    public String nuevoUsuario() {
+        return "redirect:/UsuariosAgregar.html";
     }
 
     @GetMapping("/reproducciones")
     public String reproducciones() {
         return "forward:/Reproduccion.html";
+    }
+
+    @GetMapping("/reproducciones/nuevo")
+    public String nuevaReproduccion() {
+        return "redirect:/ReproduccionesAgregar.html";
     }
 }

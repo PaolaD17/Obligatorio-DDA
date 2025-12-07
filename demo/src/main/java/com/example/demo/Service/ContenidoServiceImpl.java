@@ -35,4 +35,24 @@ public class ContenidoServiceImpl implements ContenidoService {
     public void eliminarContenido(int id) {
         contenidoRepository.deleteById(id);
     }
+
+    @Override
+    public ContenidoEntity modificarContenido(ContenidoEntity contenido, int id) {
+        ContenidoEntity CExistente = contenidoRepository.findById(id).orElse(null);
+        if (CExistente != null) {
+            CExistente.setTitulo(contenido.getTitulo());
+            CExistente.setDescripcion(contenido.getDescripcion());
+            CExistente.setCategoria(contenido.getCategoria());
+            CExistente.setDuracion(contenido.getDuracion());
+            CExistente.setAnioEstreno(contenido.getAnioEstreno());
+            CExistente.setPrecioSuscripcion(contenido.getPrecioSuscripcion());
+            CExistente.setPortadaUrl(contenido.getPortadaUrl());
+            CExistente.setTrailerUrl(contenido.getTrailerUrl());
+            CExistente.setReproducciones(contenido.getReproducciones());
+            CExistente.setExclusivoPremium(contenido.isExclusivoPremium());
+
+            return contenidoRepository.save(CExistente);
+        }
+        return null;
+    }
 }

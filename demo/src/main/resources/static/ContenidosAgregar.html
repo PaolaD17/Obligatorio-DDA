@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>StreamUp</title>
+    <title>Agregar contenido</title>
     <link rel="stylesheet" href="/estilos.css">
 </head>
 
@@ -55,15 +55,49 @@
     </header>
 
     <main class="contenido-principal">
-        <img src="/StreamUp.png" class="imagen-principal" alt="Imagen de bienvenida">
+        <h2 class="titulo-formulario">Agregar Contenido</h2>
+        <form id="formUsuario" class="formulario">
+            <label>Título</label>
+            <input type="text" id="titulo" required>
+
+            <label>Descripción</label>
+            <input type="text" id="descripcion" required>
+
+            <label>Categoría</label>
+            <input type="text" id="categoria" required>
+
+            <label>Duración (minutos)</label>
+            <input type="number" id="duracion" required>
+
+            <label>Año de estreno</label>
+            <input type="number" id="anioEstreno" required>
+
+            <!-- TIPO DE OPERACIÓN -->
+            <label>Tipo de operación</label>
+            <select id="tipoOperacion" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+                <option value="ALQUILER">Alquiler</option>
+                <option value="COMPRA">Compra</option>
+            </select>
+
+            <label>Costo de suscripción</label>
+            <input type="number" id="precioSuscripcion" required>
+
+            <label>Portada</label>
+            <input type="text" id="portadaUrl" required>
+
+            <label>Trailer</label>
+            <input type="text" id="trailerUrl" required>
+
+            <button type="submit">Agregar</button>
+        </form>
     </main>
 
     <footer class="footer">
-        &copy; 2025 StreamUp. Todos los derechos reservados.
+        © 2025 StreamUp. Todos los derechos reservados.
     </footer>
     <script>
         const dropdowns = document.querySelectorAll(".dropdown-btn");
-
         dropdowns.forEach(btn => {
             btn.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -75,7 +109,6 @@
                         drop.classList.remove("open");
                     }
                 });
-
                 parent.classList.toggle("open");
             });
         });
@@ -88,7 +121,6 @@
             }
         });
     </script>
-
 </body>
 
 </html>

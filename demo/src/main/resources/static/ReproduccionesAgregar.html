@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>StreamUp</title>
+    <title>Agregar reproducción</title>
     <link rel="stylesheet" href="/estilos.css">
 </head>
 
@@ -55,15 +55,36 @@
     </header>
 
     <main class="contenido-principal">
-        <img src="/StreamUp.png" class="imagen-principal" alt="Imagen de bienvenida">
+        <h2 class="titulo-formulario">Agregar Reproducción</h2>
+        <form id="formUsuario" class="formulario">
+            <label>Usuario</label>
+            <select id="usuario" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+            </select>
+
+            <label>Contenido</label>
+            <select id="contenido" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+            </select>
+
+            <label>Fecha y hora</label>
+            <input type="date" id="fechaHora" required>
+
+            <label>Duración (minutos)</label>
+            <input type="number" id="duracionMinutos" required>
+
+            <label>Calificación (1 a 5)</label>
+            <input type="number" id="anioEstreno" required>
+
+            <button type="submit">Agregar</button>
+        </form>
     </main>
 
     <footer class="footer">
-        &copy; 2025 StreamUp. Todos los derechos reservados.
+        © 2025 StreamUp. Todos los derechos reservados.
     </footer>
     <script>
         const dropdowns = document.querySelectorAll(".dropdown-btn");
-
         dropdowns.forEach(btn => {
             btn.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -75,7 +96,6 @@
                         drop.classList.remove("open");
                     }
                 });
-
                 parent.classList.toggle("open");
             });
         });
@@ -87,8 +107,45 @@
                 });
             }
         });
-    </script>
 
+        fetch("http://localhost:8080/api/usuarios")
+            .then(response => response.json())
+            .then(usuarios => {
+                const select = document.getElementById("usuario");
+
+                usuarios.forEach(usuario => {
+                    const option = document.createElement("option");
+                    option.value = usuario.id; // se guarda el ID
+                    option.textContent = usuario.nombreCompleto + " - " + usuario.email;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Error al cargar usuarios:", error);
+            });
+
+        fetch("http://localhost:8080/api/contenidos")
+            .then(response => response.json())
+            .then(contenidos => {
+                const select = document.getElementById("contenido");
+
+                contenidos.forEach(contenido => {
+                    const option = document.createElement("option");
+                    option.value = contenido.id;
+
+                    option.textContent =
+                        contenido.titulo + " - " +
+                        contenido.categoria + " - " +
+                        contenido.tipoOperacion + " - $" +
+                        contenido.costo;
+
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Error al cargar contenidos:", error);
+            });
+    </script>
 </body>
 
 </html>
