@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.Entity.ContenidoEntity;
 import com.example.demo.Service.UsuarioService;
 
 import org.springframework.ui.Model;
