@@ -71,10 +71,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         boolean esPremiumNuevo = dto.getTipoUsuario().equalsIgnoreCase("PREMIUM");
         boolean esPremiumActual = usuarioExistente instanceof UsuarioPremiumEntity;
 
-        // ✅ SI CAMBIA EL TIPO → BORRAR Y CREAR NUEVO
         if (esPremiumNuevo != esPremiumActual) {
 
-            usuarioRepository.deleteById(id); // 🔴 BORRAMOS EL VIEJO
+            usuarioRepository.deleteById(id);
 
             UsuarioEntity usuarioNuevo;
 
@@ -93,7 +92,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             return usuarioRepository.save(usuarioNuevo);
         }
 
-        // ✅ SI NO CAMBIA EL TIPO → SOLO ACTUALIZA
         usuarioExistente.setNombreCompleto(dto.getNombreCompleto());
         usuarioExistente.setEmail(dto.getEmail());
         usuarioExistente.setFechaRegistro(dto.getFechaRegistro());

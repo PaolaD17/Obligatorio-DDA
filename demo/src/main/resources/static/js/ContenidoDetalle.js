@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("trailer").load();
 
                 document.getElementById("modificarBtn").onclick = () => {
-                    window.location.href = `/contenidos/modificar?id=${contenido.id}`;
+                    window.location.href = `/contenidos/modificar/${contenido.id}`;
                 };
                 document.getElementById("eliminarBtn").onclick = () => {
                     if (confirm("¿Desea eliminar este contenido?")) {

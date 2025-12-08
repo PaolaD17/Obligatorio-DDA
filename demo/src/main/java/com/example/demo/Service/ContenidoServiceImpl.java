@@ -14,7 +14,6 @@ public class ContenidoServiceImpl implements ContenidoService {
     @Autowired
     private ContenidoRepository contenidoRepository;
 
-
     @Override
     public ContenidoEntity agregarContenido(ContenidoEntity contenido) {
         return contenidoRepository.save(contenido);
@@ -37,22 +36,21 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public ContenidoEntity modificarContenido(ContenidoEntity contenido, int id) {
-        ContenidoEntity CExistente = contenidoRepository.findById(id).orElse(null);
-        if (CExistente != null) {
-            CExistente.setTitulo(contenido.getTitulo());
-            CExistente.setDescripcion(contenido.getDescripcion());
-            CExistente.setCategoria(contenido.getCategoria());
-            CExistente.setDuracion(contenido.getDuracion());
-            CExistente.setAnioEstreno(contenido.getAnioEstreno());
-            CExistente.setPrecioSuscripcion(contenido.getPrecioSuscripcion());
-            CExistente.setPortadaUrl(contenido.getPortadaUrl());
-            CExistente.setTrailerUrl(contenido.getTrailerUrl());
-            CExistente.setReproducciones(contenido.getReproducciones());
-            CExistente.setExclusivoPremium(contenido.isExclusivoPremium());
+    public ContenidoEntity modificarContenido(ContenidoEntity nuevo, int id) {
 
-            return contenidoRepository.save(CExistente);
-        }
-        return null;
+        ContenidoEntity existente = contenidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contenido no encontrado"));
+
+        existente.setTitulo(nuevo.getTitulo());
+        existente.setDescripcion(nuevo.getDescripcion());
+        existente.setCategoria(nuevo.getCategoria());
+        existente.setDuracion(nuevo.getDuracion());
+        existente.setAnioEstreno(nuevo.getAnioEstreno());
+        existente.setTipoOperacion(nuevo.getTipoOperacion());
+        existente.setPrecioSuscripcion(nuevo.getPrecioSuscripcion());
+        existente.setExclusivoPremium(nuevo.isExclusivoPremium());
+
+        return contenidoRepository.save(existente);
     }
+
 }
