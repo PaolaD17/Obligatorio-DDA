@@ -18,7 +18,7 @@ import com.example.demo.Repository.UsuarioRepository;
 public class ReproduccionServiceImpl implements ReproduccionService {
     @Autowired
     private ReproduccionRepository reproduccionRepository;
-    
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -61,16 +61,15 @@ public class ReproduccionServiceImpl implements ReproduccionService {
 
     @Override
     public ReproduccionEntity modificarReproduccion(ReproduccionEntity reproduccion, int id) {
-        ReproduccionEntity CExistente = reproduccionRepository.findById(id).orElse(null);
-        if (CExistente != null) {
-            CExistente.setUsuario(reproduccion.getUsuario());
-            CExistente.setContenido(reproduccion.getContenido());
-            CExistente.setFechaHora(reproduccion.getFechaHora());
-            CExistente.setDuracionMinutos(reproduccion.getDuracionMinutos());
-            CExistente.setCalificacion(reproduccion.getCalificacion());
+        ReproduccionEntity CExistente = reproduccionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reproduccion no encontrada"));
 
-            return reproduccionRepository.save(CExistente);
+        int c = reproduccion.getCalificacion();
+        if (c < 1 || c > 5) {
+            throw new RuntimeException("La calificacion debe estar entre 1 y 5");
         }
-        return null;
+        CExistente.setCalificacion(c);
+
+        return reproduccionRepository.save(CExistente);
     }
 }

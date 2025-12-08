@@ -17,7 +17,7 @@ import com.example.demo.Entity.ReproduccionEntity;
 import com.example.demo.Service.ReproduccionService;
 
 @RestController
-@RequestMapping("/api/reproducciones")   
+@RequestMapping("/api/reproducciones")
 public class ReproduccionController {
     @Autowired
     private ReproduccionService reproduccionService;
@@ -31,7 +31,7 @@ public class ReproduccionController {
     public ArrayList<ReproduccionEntity> listarReproduccion() {
         return reproduccionService.listarReproduccion();
     }
-    
+
     @GetMapping("/{id}")
     public ReproduccionEntity obtenerReproduccion(@PathVariable int id) {
         return reproduccionService.obtenerReproduccionPorId(id);

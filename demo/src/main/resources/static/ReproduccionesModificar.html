@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Reproducción</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">🎬 StreamUp</div>
+            <ul class="nav-links">
+                <!-- HOME -->
+                <li>
+                    <a href="/">Inicio</a>
+                </li>
+                <!-- USUARIOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Usuarios ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/usuarios">Listar Usuarios</a></li>
+                        <li><a href="/usuarios/nuevo">Agregar Usuario</a></li>
+                    </ul>
+                </li>
+                <!-- CONTENIDOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Contenidos ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contenidos">Listar contenidos</a></li>
+                        <li><a href="/contenidos/nuevo">Agregar Contenido</a></li>
+                    </ul>
+                </li>
+                <!-- REPRODUCCIONES -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Reproducciones ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/reproducciones">Listar reproducciones</a></li>
+                        <li><a href="/reproducciones/nuevo">Agregar Reproducción</a></li>
+                    </ul>
+                </li>
+                <!-- ESTADÍSTICAS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Estadísticas ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/estadisticas">Usuarios</a></li>
+                        <li><a href="/estadisticas">Contenidos</a></li>
+                        <li><a href="/estadisticas">Reproducciones</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido-principal">
+        <h2 class="titulo-formulario">Modificar Reproducción</h2>
+        <form id="formReproduccion" class="formulario" data-id="<!-- ID de la reproducción -->">
+            <input type="hidden" id="reproduccionId" value="">
+
+            <label>Reproducción</label>
+            <select id="reproduccion" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+            </select>
+
+            <label>Contenido</label>
+            <select id="contenido" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+            </select>
+
+            <label>Fecha y hora</label>
+            <input type="datetime-local" id="fechaHora" required>
+
+            <label>Duración (minutos)</label>
+            <input type="number" id="duracionMinutos" required>
+
+            <label>Calificación (1 a 5)</label>
+            <input type="number" id="calificacion" required>
+
+            <button type="submit">Guardar cambios</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        © 2025 StreamUp. Todos los derechos reservados.
+    </footer>
+    <script src="/js/ReproduccionesModificar.js"></script>
+</body>
+
+</html>
