@@ -61,46 +61,48 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioEntity modificarUsuario(UsuarioDTO dto, int id) {
+
         UsuarioEntity usuarioExistente = usuarioRepository.findById(id).orElse(null);
+
         if (usuarioExistente == null) {
-            return null; // o lanzar excepción
+            return null;
         }
 
-        String tipoNuevo = dto.getTipoUsuario();
-        String tipoActual = usuarioExistente instanceof UsuarioPremiumEntity ? "PREMIUM" : "ESTANDAR";
+        boolean esPremiumNuevo = dto.getTipoUsuario().equalsIgnoreCase("PREMIUM");
+        boolean esPremiumActual = usuarioExistente instanceof UsuarioPremiumEntity;
 
-        // Si el tipo cambió, necesitamos crear una nueva entidad
-        if (!tipoNuevo.equalsIgnoreCase(tipoActual)) {
-            UsuarioEntity usuarioModificado;
+        // ✅ SI CAMBIA EL TIPO → BORRAR Y CREAR NUEVO
+        if (esPremiumNuevo != esPremiumActual) {
 
-            if (tipoNuevo.equalsIgnoreCase("PREMIUM")) {
+            usuarioRepository.deleteById(id); // 🔴 BORRAMOS EL VIEJO
+
+            UsuarioEntity usuarioNuevo;
+
+            if (esPremiumNuevo) {
                 UsuarioPremiumEntity premium = new UsuarioPremiumEntity();
                 premium.setFechaInicioMembresia(dto.getFechaMembresia());
-                usuarioModificado = premium;
+                usuarioNuevo = premium;
             } else {
-                UsuarioEstandarEntity estandar = new UsuarioEstandarEntity();
-                usuarioModificado = estandar;
+                usuarioNuevo = new UsuarioEstandarEntity();
             }
 
-            // Copiamos los campos básicos
-            usuarioModificado.setId(usuarioExistente.getId());
-            usuarioModificado.setNombreCompleto(dto.getNombreCompleto());
-            usuarioModificado.setEmail(dto.getEmail());
-            usuarioModificado.setFechaRegistro(dto.getFechaRegistro());
+            usuarioNuevo.setNombreCompleto(dto.getNombreCompleto());
+            usuarioNuevo.setEmail(dto.getEmail());
+            usuarioNuevo.setFechaRegistro(dto.getFechaRegistro());
 
-            return usuarioRepository.save(usuarioModificado);
-
-        } else {
-            // Si no cambió el tipo, actualizamos los campos del usuario existente
-            usuarioExistente.setNombreCompleto(dto.getNombreCompleto());
-            usuarioExistente.setEmail(dto.getEmail());
-            usuarioExistente.setFechaRegistro(dto.getFechaRegistro());
-
-            if (usuarioExistente instanceof UsuarioPremiumEntity) {
-                ((UsuarioPremiumEntity) usuarioExistente).setFechaInicioMembresia(dto.getFechaMembresia());
-            }
-
-            return usuarioRepository.save(usuarioExistente);
+            return usuarioRepository.save(usuarioNuevo);
         }
+
+        // ✅ SI NO CAMBIA EL TIPO → SOLO ACTUALIZA
+        usuarioExistente.setNombreCompleto(dto.getNombreCompleto());
+        usuarioExistente.setEmail(dto.getEmail());
+        usuarioExistente.setFechaRegistro(dto.getFechaRegistro());
+
+        if (usuarioExistente instanceof UsuarioPremiumEntity) {
+            ((UsuarioPremiumEntity) usuarioExistente).setFechaInicioMembresia(dto.getFechaMembresia());
+        }
+
+        return usuarioRepository.save(usuarioExistente);
     }
+
 }
