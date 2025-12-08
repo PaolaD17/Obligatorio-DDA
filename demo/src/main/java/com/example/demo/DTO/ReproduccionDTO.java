@@ -2,6 +2,8 @@ package com.example.demo.DTO;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ReproduccionDTO {
     private int usuarioId;
     private int contenidoId;
@@ -24,6 +26,7 @@ public class ReproduccionDTO {
         this.contenidoId = contenidoId;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     public LocalDateTime getFechaHora() {
         return fechaHora;
     }

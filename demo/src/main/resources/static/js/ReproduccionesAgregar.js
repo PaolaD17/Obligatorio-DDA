@@ -57,12 +57,13 @@ form.addEventListener("submit", function (e) {
     const calificacion = parseInt(document.getElementById("calificacion").value);
 
     const data = {
-        usuario: { id: parseInt(usuarioId) },
-        contenido: { id: parseInt(contenidoId) },
+        usuarioId: parseInt(usuarioId),
+        contenidoId: parseInt(contenidoId),
         fechaHora: fechaHora,
         duracionMinutos: duracionMinutos,
         calificacion: calificacion
     };
+
 
     fetch("http://localhost:8080/api/reproducciones", {
         method: "POST",
@@ -74,7 +75,7 @@ form.addEventListener("submit", function (e) {
             return res.json();
         })
         .then(reproduccion => {
-            alert("Reproducción agregada correctamente con ID " + reproduccion.id);
+            alert("Reproducción agregada correctamente con ID.");
             window.location.href = "/reproducciones";
         })
         .catch(err => alert(err.message));

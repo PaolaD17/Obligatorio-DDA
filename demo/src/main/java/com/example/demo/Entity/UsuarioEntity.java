@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioEntity {
@@ -34,6 +36,7 @@ public class UsuarioEntity {
     private LocalDate fechaRegistro = LocalDate.now();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ReproduccionEntity> reproducciones = new ArrayList<>();
 
     public int getId() {

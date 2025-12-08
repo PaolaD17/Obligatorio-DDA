@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -54,6 +56,7 @@ public class ContenidoEntity {
     private String trailerUrl;
 
     @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ReproduccionEntity> reproducciones;
     
     private boolean exclusivoPremium = false;

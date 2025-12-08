@@ -16,3 +16,4 @@ document.addEventListener("click", function (e) {
         document.querySelectorAll(".dropdown").forEach(drop => drop.classList.remove("open"));
     }
 });
+
