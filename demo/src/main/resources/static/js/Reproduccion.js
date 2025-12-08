@@ -36,6 +36,8 @@ fetch("http://localhost:8080/api/reproducciones")
                 <td>${reproduccion.usuario.nombreCompleto}</td>
                 <td>${reproduccion.contenido.titulo}</td>
                 <td>${reproduccion.fechaHora}</td>
+                <td>${reproduccion.duracionMinutos}</td>
+                <td>${reproduccion.calificacion}</td>
                 <td>
                     <button onclick="editarReproduccion(${reproduccion.id})">Modificar</button>
                     <button onclick="eliminarReproduccion(${reproduccion.id})">Eliminar</button>

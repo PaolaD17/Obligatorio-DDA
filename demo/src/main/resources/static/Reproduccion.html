@@ -58,23 +58,20 @@
         <h2>Listado de Reproducciones</h2>
 
         <table border="1" cellpadding="5" style="margin: 0 auto;">
-            <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Contenido</th>
-                <th>Fecha y hora</th>
-                <th>Duración</th>
-                <th>Calificación</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Contenido</th>
+                    <th>Fecha y hora</th>
+                    <th>Duración</th>
+                    <th>Calificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-            <tr th:each="r : ${reproducciones}">
-                <td th:text="${r.id}"></td>
-                <td th:text="${r.usuario}"></td>
-                <td th:text="${r.contenido}"></td>
-                <td th:text="${r.fechaHora}"></td>
-                <td th:text="${r.duracionMinutos}"></td>
-                <td th:text="${r.calificacion}"></td>
-            </tr>
+            <tbody id="tablaReproducciones">
+            </tbody>
         </table>
     </main>
 
@@ -83,4 +80,5 @@
     </footer>
     <script src="/js/Reproduccion.js"></script>
 </body>
+
 </html>
