@@ -44,7 +44,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public UsuarioEntity modificarUsuario(@PathVariable int id, @RequestBody UsuarioEntity usuario) {
-        return usuarioService.modificarUsuario(usuario, id);
+    public UsuarioEntity modificarUsuario(@PathVariable int id, @RequestBody UsuarioDTO dto) {
+        return usuarioService.modificarUsuario(dto, id);
     }
 }

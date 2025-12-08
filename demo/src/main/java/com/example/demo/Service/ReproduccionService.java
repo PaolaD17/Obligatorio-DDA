@@ -2,10 +2,11 @@ package com.example.demo.Service;
 
 import java.util.ArrayList;
 
+import com.example.demo.DTO.ReproduccionDTO;
 import com.example.demo.Entity.ReproduccionEntity;
 
 public interface ReproduccionService {
-    public ReproduccionEntity agregarReproduccion(ReproduccionEntity contenido);
+    ReproduccionEntity agregarReproduccion(ReproduccionDTO dto);
 
     public ArrayList<ReproduccionEntity> listarReproduccion();
 

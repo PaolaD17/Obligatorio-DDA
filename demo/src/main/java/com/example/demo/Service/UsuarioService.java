@@ -15,5 +15,5 @@ public interface UsuarioService {
 
     public void eliminarUsuario(int id);
     
-    public UsuarioEntity modificarUsuario(UsuarioEntity usuario, int id);
+    public UsuarioEntity modificarUsuario(UsuarioDTO dto, int id);
 }

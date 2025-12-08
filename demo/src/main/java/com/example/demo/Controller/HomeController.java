@@ -57,6 +57,12 @@ public class HomeController {
         return "redirect:/UsuariosAgregar.html";
     }
 
+    @GetMapping("/usuarios/modificar/{id}")
+    public String modificarUsuario(@PathVariable int id, Model model) {
+        model.addAttribute("usuarioId", id); // pasar el ID al HTML
+        return "forward:/UsuariosModificar.html";
+    }
+
     //REPRODUCCIONES
     @GetMapping("/reproducciones")
     public String reproducciones() {

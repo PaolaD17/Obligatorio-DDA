@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTO.ReproduccionDTO;
 import com.example.demo.Entity.ReproduccionEntity;
 import com.example.demo.Service.ReproduccionService;
 
@@ -22,8 +23,8 @@ public class ReproduccionController {
     private ReproduccionService reproduccionService;
 
     @PostMapping()
-    public ReproduccionEntity agregarReproduccion(@RequestBody ReproduccionEntity reproduccion) {
-        return reproduccionService.agregarReproduccion(reproduccion);
+    public ReproduccionEntity agregarReproduccion(@RequestBody ReproduccionDTO dto) {
+        return reproduccionService.agregarReproduccion(dto);
     }
 
     @GetMapping()
