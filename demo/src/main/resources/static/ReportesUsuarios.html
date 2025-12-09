@@ -55,24 +55,46 @@
     </header>
 
     <main class="contenido-principal">
-        <h2>Reportes de Usuarios</h2>
+        <h2>📊 Reportes de Usuarios</h2>
 
-        <table border="1" cellpadding="5" style="margin: 0 auto;">
+        <!-- FILTRO POR FECHA -->
+        <section class="bloque-reporte">
+            <h3>Filtrar por fecha de registro</h3>
+
+            <input type="date" id="fechaDesde">
+            <input type="date" id="fechaHasta">
+            <button id="btnFiltrarUsuarios">Filtrar</button>
+        </section>
+
+        <hr>
+
+        <h3>Usuarios Premium</h3>
+        <table id="tablaPremium" border="1" cellpadding="15">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Usuario</th>
-                    <th>Contenido</th>
-                    <th>Fecha y hora</th>
-                    <th>Duración</th>
-                    <th>Calificación</th>
-                    <th>Acciones</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Fecha Registro</th>
+                    <th>Fecha Membresía</th>
                 </tr>
             </thead>
-
-            <tbody id="tablaReproducciones">
-            </tbody>
+            <tbody id="tablaUsuariosPremium"></tbody>
         </table>
+        <p id="mensajePremium"></p>
+
+        <h3>Usuarios Estándar</h3>
+        <table id="tablaEstandar" border="1" cellpadding="15">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Fecha Registro</th>
+                </tr>
+            </thead>
+            <tbody id="tablaUsuariosEstandar"></tbody>
+        </table>
+        <p id="mensajeEstandar"></p>
+
     </main>
 
     <footer class="footer">

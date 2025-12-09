@@ -107,6 +107,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public ArrayList<UsuarioEntity> filtrarUsuarios(String tipo, LocalDate desde, LocalDate hasta) {
-        return usuarioRepository.filtrarUsuarios(tipo, desde, hasta);
+
+        ArrayList<UsuarioEntity> lista = usuarioRepository.filtrarUsuarios(desde, hasta);
+
+        if (tipo == null || tipo.isEmpty()) {
+            return lista;
+        }
+
+        ArrayList<UsuarioEntity> filtrados = new ArrayList<>();
+
+        for (UsuarioEntity u : lista) {
+            if (tipo.equalsIgnoreCase("premium") && u instanceof UsuarioPremiumEntity) {
+                filtrados.add(u);
+            }
+            if (tipo.equalsIgnoreCase("estandar") && u instanceof UsuarioEstandarEntity) {
+                filtrados.add(u);
+            }
+        }
+        return filtrados;
     }
 }

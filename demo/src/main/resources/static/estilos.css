@@ -334,5 +334,19 @@ body {
 }
 
 #tablaResultado {
-    margin: 15px auto 0 auto;  /* separación arriba + centrado */
+    margin: 15px auto;  /* separación arriba + centrado */
+    width: 100%;
+}
+
+#tablaPremium,
+#tablaEstandar {
+    margin: 15px auto;
+    width: 50%;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+    color: darkred;
 }
