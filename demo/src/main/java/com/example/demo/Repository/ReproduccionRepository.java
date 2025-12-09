@@ -37,5 +37,5 @@ public interface ReproduccionRepository extends JpaRepository<ReproduccionEntity
             """)
     ArrayList<ReproduccionEntity> findByFecha(@Param("fecha") LocalDate fecha);
 
-    List<ReproduccionEntity> findByFechaHoraBetween(LocalDateTime desde, LocalDateTime hasta);
+    List<ReproduccionEntity> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
 }

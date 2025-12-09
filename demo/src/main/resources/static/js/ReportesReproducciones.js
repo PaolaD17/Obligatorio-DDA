@@ -82,3 +82,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// ✅ Botón buscar contenidos por fecha
+document.getElementById("btnListarPorFecha")
+    .addEventListener("click", listarContenidosPorFecha);
+
+function listarContenidosPorFecha() {
+
+    const fecha = document.getElementById("inputFecha").value;
+    const tabla = document.getElementById("tablaContenidosFecha");
+    const mensaje = document.getElementById("mensajeFecha");
+
+    tabla.innerHTML = "";
+    mensaje.innerHTML = "";
+
+    if (!fecha) {
+        mensaje.innerHTML = "⚠️ Debe seleccionar una fecha";
+        return;
+    }
+
+    fetch(`/api/reportes/contenidos-por-fecha?fecha=${fecha}`)
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.length === 0) {
+                mensaje.innerHTML = "❌ No hay contenidos reproducidos en esa fecha";
+                return;
+            }
+
+            data.forEach(c => {
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${c.titulo}</td>
+                        <td>${c.categoria}</td>
+                        <td>${c.duracion}</td>
+                        <td>$${c.precioSuscripcion}</td>
+                        <td>${c.exclusivoPremium ? "Sí" : "No"}</td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            mensaje.innerHTML = "❌ Error al cargar los contenidos";
+        });
+}
