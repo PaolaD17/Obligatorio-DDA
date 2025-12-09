@@ -20,29 +20,42 @@ document.addEventListener("click", function (e) {
 document.getElementById("btnListarReproducciones").addEventListener("click", listarReproducciones);
 document.getElementById("btnListarPromedio").addEventListener("click", listarPromedio);
 
-// ✅ 1) CONTENIDOS CON MÁS DE N REPRODUCCIONES
+// CONTENIDOS CON MÁS DE N REPRODUCCIONES
 function listarReproducciones() {
     const cantidad = document.getElementById("inputReproducciones").value;
 
     fetch(`/api/reportes/contenidos-mas-reproducidos/${cantidad}`)
         .then(res => res.json())
         .then(data => {
+
             const tabla = document.getElementById("tablaReproducciones");
+            const mensaje = document.getElementById("mensajeVacio");
+            const contenedorTabla = document.getElementById("tablaResultado");
+
             tabla.innerHTML = "";
+            mensaje.innerHTML = "";
+            contenedorTabla.style.display = "table";
+
+            if (data.length === 0) {
+                contenedorTabla.style.display = "none";
+                mensaje.innerHTML = "❌ No hay contenido para esa cantidad de reproducciones";
+                return;
+            }
 
             data.forEach(c => {
                 tabla.innerHTML += `
                     <tr>
-                        <td>${c[0]}</td>   // TITULO
-                        <td>${c[1]}</td>   // TOTAL REPRODUCCIONES
+                        <td>${c.titulo}</td>
+                        <td>${c.totalReproducciones}</td>
                     </tr>
                 `;
             });
 
-        });
+        })
+        .catch(err => console.error("ERROR:", err));
 }
 
-// ✅ 2) CARGAR SELECT CON CONTENIDOS
+// CARGAR SELECT CON CONTENIDOS
 fetch("/api/contenidos")
     .then(res => res.json())
     .then(data => {
@@ -55,7 +68,7 @@ fetch("/api/contenidos")
         });
     });
 
-// ✅ 3) PROMEDIO DE CALIFICACIONES
+// PROMEDIO DE CALIFICACIONES
 function listarPromedio() {
     const id = document.getElementById("selectContenido").value;
 

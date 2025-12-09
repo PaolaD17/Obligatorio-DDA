@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DTO.ReporteContenidoDTO;
 import com.example.demo.Entity.ContenidoEntity;
 import com.example.demo.Entity.ReproduccionEntity;
 import com.example.demo.Repository.ContenidoRepository;
@@ -61,16 +62,8 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public ArrayList<ContenidoEntity> obtenerContenidosConMasDeNReproducciones(int n) {
-
-        ArrayList<Object[]> resultado = reproduccionRepository.obtenerContenidosConMasDeNReproducciones(n);
-        ArrayList<ContenidoEntity> contenidos = new ArrayList<>();
-
-        for (Object[] fila : resultado) {
-            int contenidoId = (int) fila[0];
-            contenidos.add(contenidoRepository.findById(contenidoId).get());
-        }
-        return contenidos;
+    public ArrayList<ReporteContenidoDTO> obtenerContenidosConMasDeNReproducciones(int n) {
+        return reproduccionRepository.obtenerContenidosConMasDeNReproducciones(n);
     }
 
     @Override

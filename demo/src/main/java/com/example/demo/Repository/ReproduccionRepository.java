@@ -7,18 +7,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.example.demo.DTO.ReporteContenidoDTO;
 import com.example.demo.Entity.ReproduccionEntity;
 
 public interface ReproduccionRepository extends JpaRepository<ReproduccionEntity, Integer> {
     public ArrayList<ReproduccionEntity> findAll();
 
     @Query("""
-                SELECT r.contenido.titulo, COUNT(r)
+                SELECT new com.example.demo.DTO.ReporteContenidoDTO(
+                    r.contenido.titulo,
+                    COUNT(r)
+                )
                 FROM ReproduccionEntity r
                 GROUP BY r.contenido.titulo
                 HAVING COUNT(r) > :n
             """)
-    ArrayList<Object[]> obtenerContenidosConMasDeNReproducciones(@Param("n") int n);
+    ArrayList<ReporteContenidoDTO> obtenerContenidosConMasDeNReproducciones(@Param("n") int n);
 
     ArrayList<ReproduccionEntity> findByUsuarioId(int usuarioId);
 
