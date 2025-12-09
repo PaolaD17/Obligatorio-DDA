@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Service
@@ -61,46 +62,51 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioEntity modificarUsuario(UsuarioDTO dto, int id) {
-
         UsuarioEntity usuarioExistente = usuarioRepository.findById(id).orElse(null);
-
         if (usuarioExistente == null) {
-            return null;
+            return null; // o lanzar excepción
         }
 
-        boolean esPremiumNuevo = dto.getTipoUsuario().equalsIgnoreCase("PREMIUM");
-        boolean esPremiumActual = usuarioExistente instanceof UsuarioPremiumEntity;
+        String tipoNuevo = dto.getTipoUsuario();
+        String tipoActual = usuarioExistente instanceof UsuarioPremiumEntity ? "PREMIUM" : "ESTANDAR";
 
-        if (esPremiumNuevo != esPremiumActual) {
+        // Si el tipo cambió, necesitamos crear una nueva entidad
+        if (!tipoNuevo.equalsIgnoreCase(tipoActual)) {
+            UsuarioEntity usuarioModificado;
 
-            usuarioRepository.deleteById(id);
-
-            UsuarioEntity usuarioNuevo;
-
-            if (esPremiumNuevo) {
+            if (tipoNuevo.equalsIgnoreCase("PREMIUM")) {
                 UsuarioPremiumEntity premium = new UsuarioPremiumEntity();
                 premium.setFechaInicioMembresia(dto.getFechaMembresia());
-                usuarioNuevo = premium;
+                usuarioModificado = premium;
             } else {
-                usuarioNuevo = new UsuarioEstandarEntity();
+                UsuarioEstandarEntity estandar = new UsuarioEstandarEntity();
+                usuarioModificado = estandar;
             }
 
-            usuarioNuevo.setNombreCompleto(dto.getNombreCompleto());
-            usuarioNuevo.setEmail(dto.getEmail());
-            usuarioNuevo.setFechaRegistro(dto.getFechaRegistro());
+            // Copiamos los campos básicos
+            usuarioModificado.setId(usuarioExistente.getId());
+            usuarioModificado.setNombreCompleto(dto.getNombreCompleto());
+            usuarioModificado.setEmail(dto.getEmail());
+            usuarioModificado.setFechaRegistro(dto.getFechaRegistro());
 
-            return usuarioRepository.save(usuarioNuevo);
+            return usuarioRepository.save(usuarioModificado);
+
+        } else {
+            // Si no cambió el tipo, actualizamos los campos del usuario existente
+            usuarioExistente.setNombreCompleto(dto.getNombreCompleto());
+            usuarioExistente.setEmail(dto.getEmail());
+            usuarioExistente.setFechaRegistro(dto.getFechaRegistro());
+
+            if (usuarioExistente instanceof UsuarioPremiumEntity) {
+                ((UsuarioPremiumEntity) usuarioExistente).setFechaInicioMembresia(dto.getFechaMembresia());
+            }
+
+            return usuarioRepository.save(usuarioExistente);
         }
-
-        usuarioExistente.setNombreCompleto(dto.getNombreCompleto());
-        usuarioExistente.setEmail(dto.getEmail());
-        usuarioExistente.setFechaRegistro(dto.getFechaRegistro());
-
-        if (usuarioExistente instanceof UsuarioPremiumEntity) {
-            ((UsuarioPremiumEntity) usuarioExistente).setFechaInicioMembresia(dto.getFechaMembresia());
-        }
-
-        return usuarioRepository.save(usuarioExistente);
     }
 
+    @Override
+    public ArrayList<UsuarioEntity> filtrarUsuarios(String tipo, LocalDate desde, LocalDate hasta) {
+        return usuarioRepository.filtrarUsuarios(tipo, desde, hasta);
+    }
 }

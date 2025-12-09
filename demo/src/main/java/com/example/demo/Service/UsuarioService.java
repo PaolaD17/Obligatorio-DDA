@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import com.example.demo.DTO.UsuarioDTO;
 import com.example.demo.Entity.UsuarioEntity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface UsuarioService {
@@ -14,6 +15,8 @@ public interface UsuarioService {
     public UsuarioEntity obtenerUsuarioPorId(int id);
 
     public void eliminarUsuario(int id);
-    
+
     public UsuarioEntity modificarUsuario(UsuarioDTO dto, int id);
+
+    public ArrayList<UsuarioEntity> filtrarUsuarios(String tipo, LocalDate desde, LocalDate hasta);
 }

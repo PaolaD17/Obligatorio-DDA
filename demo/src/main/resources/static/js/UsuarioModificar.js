@@ -28,60 +28,73 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = partes[partes.length - 1];
 
     if (!id) {
-        alert("No se recibió el ID del contenido");
+        alert("No se recibió el ID del usuario");
         return;
     }
 
-    document.getElementById("contenidoId").value = id;
+    document.getElementById("usuarioId").value = id;
 
-    // 🔹 TRAER CONTENIDO Y CARGAR FORMULARIO
-    fetch(`/api/contenidos/${id}`)
+    //TRAER USUARIO Y CARGAR FORMULARIO
+    fetch(`/api/usuarios/${id}`)
         .then(response => response.json())
-        .then(contenido => {
+        .then(usuario => {
 
-            console.log("CONTENIDO RECIBIDO:", contenido); // ✅ para debug
+            document.getElementById("nombreCompleto").value = usuario.nombreCompleto;
+            document.getElementById("email").value = usuario.email;
+            document.getElementById("fechaRegistro").value = usuario.fechaRegistro;
 
-            document.getElementById("titulo").value = contenido.titulo;
-            document.getElementById("descripcion").value = contenido.descripcion;
-            document.getElementById("genero").value = contenido.genero;
-            document.getElementById("duracion").value = contenido.duracion;
-            document.getElementById("precio").value = contenido.precioSuscripcion;
-
-            if (contenido.exclusivoPremium) {
-                document.getElementById("exclusivoPremium").checked = true;
+            if (usuario.fechaInicioMembresia) {
+                // ES PREMIUM
+                document.getElementById("tipoUsuario").value = "PREMIUM";
+                document.getElementById("campoPremium").classList.remove("oculto");
+                document.getElementById("fechaMembresia").value = usuario.fechaInicioMembresia;
             } else {
-                document.getElementById("exclusivoPremium").checked = false;
+                // ES ESTÁNDAR
+                document.getElementById("tipoUsuario").value = "ESTANDAR";
+                document.getElementById("campoPremium").classList.add("oculto");
             }
         });
 
-    // 🔹 GUARDAR CAMBIOS
-    document.getElementById("formContenido").addEventListener("submit", function (e) {
+    document.getElementById("tipoUsuario").addEventListener("change", function () {
+        const campoPremium = document.getElementById("campoPremium");
+        const fechaMembresia = document.getElementById("fechaMembresia");
+
+        if (this.value === "PREMIUM") {
+            campoPremium.classList.remove("oculto");
+        } else {
+            campoPremium.classList.add("oculto");
+            fechaMembresia.value = ""; // 🔥 LIMPIA LA FECHA
+        }
+    });
+
+
+    //GUARDAR CAMBIOS
+    document.getElementById("formUsuario").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const contenidoActualizado = {
-            titulo: document.getElementById("titulo").value,
-            descripcion: document.getElementById("descripcion").value,
-            genero: document.getElementById("genero").value,
-            duracion: document.getElementById("duracion").value,
-            precioSuscripcion: document.getElementById("precio").value,
-            exclusivoPremium: document.getElementById("exclusivoPremium").checked
+        const usuarioActualizado = {
+            nombreCompleto: document.getElementById("nombreCompleto").value,
+            email: document.getElementById("email").value,
+            fechaRegistro: document.getElementById("fechaRegistro").value,
+            tipoUsuario: document.getElementById("tipoUsuario").value,
+            fechaMembresia: document.getElementById("fechaMembresia").value || null
         };
 
-        fetch(`/api/contenidos/${id}`, {
+        fetch(`/api/usuarios/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(contenidoActualizado)
+            body: JSON.stringify(usuarioActualizado)
         })
-        .then(response => {
-            if (response.ok) {
-                alert("Contenido modificado correctamente");
-                window.location.href = "/contenidos";
-            } else {
-                alert("Error al modificar contenido");
-            }
-        });
+            .then(response => {
+                if (response.ok) {
+                    alert("Usuario modificado correctamente");
+                    window.location.href = "/usuarios";
+                } else {
+                    alert("Error al modificar usuario");
+                }
+            });
     });
 
 });

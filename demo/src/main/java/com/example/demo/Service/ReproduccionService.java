@@ -15,4 +15,8 @@ public interface ReproduccionService {
     public void eliminarReproduccion(int id);
 
     public ReproduccionEntity modificarReproduccion(ReproduccionEntity reproduccion, int id);
+
+    public ArrayList<ReproduccionEntity> obtenerReproduccionesPorUsuario(int usuarioId);
+
+    public Double promedioCalificacion(int contenidoId);
 }

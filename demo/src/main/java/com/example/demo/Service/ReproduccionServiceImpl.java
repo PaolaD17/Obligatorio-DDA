@@ -72,4 +72,15 @@ public class ReproduccionServiceImpl implements ReproduccionService {
 
         return reproduccionRepository.save(CExistente);
     }
+
+    @Override
+    public ArrayList<ReproduccionEntity> obtenerReproduccionesPorUsuario(int usuarioId) {
+        return reproduccionRepository.findByUsuarioId(usuarioId);
+    }
+
+    @Override
+    public Double promedioCalificacion(int contenidoId) {
+        Double promedio = reproduccionRepository.promedioCalificacion(contenidoId);
+        return (promedio != null) ? promedio : 0.0;
+    }
 }
