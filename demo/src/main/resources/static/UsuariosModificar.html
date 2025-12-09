@@ -1,94 +1,94 @@
-    <!DOCTYPE html>
-    <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Modificar Usuario</title>
-        <link rel="stylesheet" href="/estilos.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Usuario</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
 
-    <body>
+<body>
 
-        <header>
-            <nav class="navbar">
-                <div class="logo">🎬 StreamUp</div>
-                <ul class="nav-links">
-                    <!-- HOME -->
-                    <li>
-                        <a href="/">Inicio</a>
-                    </li>
-                    <!-- USUARIOS -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn">Usuarios ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/usuarios">Listar Usuarios</a></li>
-                            <li><a href="/usuarios/nuevo">Agregar Usuario</a></li>
-                        </ul>
-                    </li>
-                    <!-- CONTENIDOS -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn">Contenidos ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/contenidos">Listar contenidos</a></li>
-                            <li><a href="/contenidos/nuevo">Agregar Contenido</a></li>
-                        </ul>
-                    </li>
-                    <!-- REPRODUCCIONES -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn">Reproducciones ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/reproducciones">Listar reproducciones</a></li>
-                            <li><a href="/reproducciones/nuevo">Agregar Reproducción</a></li>
-                        </ul>
-                    </li>
-                    <!-- ESTADÍSTICAS -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn">Estadísticas ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/estadisticas">Usuarios</a></li>
-                            <li><a href="/estadisticas">Contenidos</a></li>
-                            <li><a href="/estadisticas">Reproducciones</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🎬 StreamUp</div>
+            <ul class="nav-links">
+                <!-- HOME -->
+                <li>
+                    <a href="/">Inicio</a>
+                </li>
+                <!-- USUARIOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Usuarios ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/usuarios">Listar Usuarios</a></li>
+                        <li><a href="/usuarios/nuevo">Agregar Usuario</a></li>
+                    </ul>
+                </li>
+                <!-- CONTENIDOS -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Contenidos ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contenidos">Listar contenidos</a></li>
+                        <li><a href="/contenidos/nuevo">Agregar Contenido</a></li>
+                    </ul>
+                </li>
+                <!-- REPRODUCCIONES -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Reproducciones ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/reproducciones">Listar reproducciones</a></li>
+                        <li><a href="/reproducciones/nuevo">Agregar Reproducción</a></li>
+                    </ul>
+                </li>
+                <!-- REPORTES -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Reportes▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/reportes/usuarios">Usuarios</a></li>
+                        <li><a href="/reportes/contenidos">Contenidos</a></li>
+                        <li><a href="/reportes/reproducciones">Reproducciones</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-        <main class="contenido-principal">
-            <h2 class="titulo-formulario">Modificar Usuario</h2>
-            <form id="formUsuario" class="formulario" data-id="<!-- ID del Usuario -->">
-                <!-- Campo oculto con el ID del usuario -->
-                <input type="hidden" id="usuarioId" value="">
+    <main class="contenido-principal">
+        <h2 class="titulo-formulario">Modificar Usuario</h2>
+        <form id="formUsuario" class="formulario" data-id="<!-- ID del Usuario -->">
+            <!-- Campo oculto con el ID del usuario -->
+            <input type="hidden" id="usuarioId" value="">
 
-                <label>Nombre completo</label>
-                <input type="text" id="nombreCompleto" required>
+            <label>Nombre completo</label>
+            <input type="text" id="nombreCompleto" required>
 
-                <label>Email</label>
-                <input type="email" id="email" required>
+            <label>Email</label>
+            <input type="email" id="email" required>
 
-                <label>Fecha de registro</label>
-                <input type="date" id="fechaRegistro" placeholder="dd-MM-yyyy" required>
+            <label>Fecha de registro</label>
+            <input type="date" id="fechaRegistro" placeholder="dd-MM-yyyy" required>
 
-                <label>Tipo de usuario</label>
-                <select id="tipoUsuario" required>
-                    <option value="" selected disabled>Seleccionar una opción...</option>
-                    <option value="ESTANDAR">Estándar</option>
-                    <option value="PREMIUM">Premium</option>
-                </select>
+            <label>Tipo de usuario</label>
+            <select id="tipoUsuario" required>
+                <option value="" selected disabled>Seleccionar una opción...</option>
+                <option value="ESTANDAR">Estándar</option>
+                <option value="PREMIUM">Premium</option>
+            </select>
 
-                <div id="campoPremium" class="campo-premium oculto">
-                    <label>Fecha inicio membresía</label>
-                    <input type="date" id="fechaMembresia">
-                </div>
+            <div id="campoPremium" class="campo-premium oculto">
+                <label>Fecha inicio membresía</label>
+                <input type="date" id="fechaMembresia">
+            </div>
 
-                <button type="submit">Guardar cambios</button>
-            </form>
-        </main>
+            <button type="submit">Guardar cambios</button>
+        </form>
+    </main>
 
-        <footer class="footer">
-            © 2025 StreamUp. Todos los derechos reservados.
-        </footer>
-        <script src="/js/UsuarioModificar.js"></script>
-    </body>
+    <footer class="footer">
+        © 2025 StreamUp. Todos los derechos reservados.
+    </footer>
+    <script src="/js/UsuarioModificar.js"></script>
+</body>
 
-    </html>
+</html>

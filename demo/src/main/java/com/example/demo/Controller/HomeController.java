@@ -17,13 +17,13 @@ public class HomeController {
     @Autowired
     private UsuarioService usuarioService;
 
-    //HOME
+    // HOME
     @GetMapping("")
     public String home() {
         return "forward:/index.html";
     }
 
-    //CONTENIDOS
+    // CONTENIDOS
     @GetMapping("/contenidos")
     public String contenidos() {
         return "forward:/Contenidos.html";
@@ -45,7 +45,7 @@ public class HomeController {
         return "forward:/ContenidosModificar.html";
     }
 
-    //USUARIOS
+    // USUARIOS
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
         model.addAttribute("Usuarios", usuarioService.listarUsuarios());
@@ -63,7 +63,7 @@ public class HomeController {
         return "forward:/UsuariosModificar.html";
     }
 
-    //REPRODUCCIONES
+    // REPRODUCCIONES
     @GetMapping("/reproducciones")
     public String reproducciones() {
         return "forward:/Reproduccion.html";
@@ -73,4 +73,21 @@ public class HomeController {
     public String nuevaReproduccion() {
         return "redirect:/ReproduccionesAgregar.html";
     }
+
+    // REPORTES
+    @GetMapping("/reportes/contenidos")
+    public String reportesContenidos() {
+        return "forward:/ReportesContenidos.html";
+    }
+
+    @GetMapping("/reportes/reproducciones")
+    public String reportesReproducciones() {
+        return "forward:/ReportesReproducciones.html";
+    }
+
+    @GetMapping("/reportes/usuarios")
+    public String reportesUsuarios() {
+        return "forward:/ReportesUsuarios.html";
+    }
+
 }

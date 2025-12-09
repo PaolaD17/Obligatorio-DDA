@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Modificar contenido</title>
+    <title>Reportes de Contenidos</title>
     <link rel="stylesheet" href="/estilos.css">
 </head>
 
@@ -55,55 +55,47 @@
     </header>
 
     <main class="contenido-principal">
-        <h2 class="titulo-formulario">Modificar Contenido</h2>
-        <form id="formContenido" class="formulario" data-id="<!-- ID del contenido -->">
-            <!-- Campo oculto con el ID del contenido -->
-            <input type="hidden" id="contenidoId" value="">
+        <h2>📊 Reportes de Contenidos</h2>
 
-            <label>Título</label>
-            <input type="text" id="titulo" required>
+        <section class="bloque-reporte">
+            <h3>Cantidad de reproducciones por contenido</h3>
 
-            <label>Descripción</label>
-            <input type="text" id="descripcion" required>
+            <input type="number" id="inputReproducciones" placeholder="Cantidad de reproducciones">
+            <button id="btnListarReproducciones">Listar</button>
 
-            <label>Categoría</label>
-            <input type="text" id="categoria" required>
+            <table border="1" cellpadding="5" style="margin-top:20px; width: 80%;">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Total Reproducciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaReproducciones">
+                    <!-- JS llena esto -->
+                </tbody>
+            </table>
+        </section>
 
-            <label>Duración (minutos)</label>
-            <input type="number" id="duracion" required>
+        <hr>
 
-            <label>Año de estreno</label>
-            <input type="number" id="anioEstreno" required>
+        <section class="bloque-reporte">
+            <h3>Promedio de calificaciones por contenido</h3>
 
-            <label>Tipo de operación</label>
-            <select id="tipoOperacion" required>
-                <option value="" disabled>Seleccionar una opción...</option>
-                <option value="ALQUILER">Alquiler</option>
-                <option value="COMPRA">Compra</option>
+            <select id="selectContenido">
+                <option value="">Seleccione un contenido</option>
             </select>
 
-            <label>Costo de suscripción</label>
-            <input type="number" id="precioSuscripcion" required>
+            <button id="btnListarPromedio">Listar promedio</button>
 
-            <label class="checkbox-label">
-                <input type="checkbox" id="exclusivoPremium">
-                Exclusivo Premium
-            </label>
+            <div id="resultadoPromedio" style="margin-top:20px; font-size:18px;"></div>
+        </section>
 
-            <label>Portada (Imagen)</label>
-            <input type="file" id="portadaFile" accept="image/*">
-
-            <label>Trailer (Video)</label>
-            <input type="file" id="trailerFile" accept="video/*">
-
-            <button type="submit">Guardar cambios</button>
-        </form>
     </main>
 
     <footer class="footer">
         © 2025 StreamUp. Todos los derechos reservados.
     </footer>
-    <script src="/js/ContenidoModificar.js"></script>
+    <script src="/js/ReportesContenidos.js"></script>
 </body>
 
 </html>
