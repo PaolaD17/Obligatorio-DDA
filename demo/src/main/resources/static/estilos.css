@@ -338,6 +338,11 @@ body {
     width: 100%;
 }
 
+#tablaReproduccion {
+    margin: 15px auto;  /* separación arriba + centrado */
+    width: 50%;
+}
+
 #tablaPremium,
 #tablaEstandar {
     margin: 15px auto;
@@ -349,4 +354,9 @@ body {
     font-weight: bold;
     margin-top: 15px;
     color: darkred;
+}
+
+#selectUsuario {
+    padding: 6px;
+    margin-right: 10px;
 }

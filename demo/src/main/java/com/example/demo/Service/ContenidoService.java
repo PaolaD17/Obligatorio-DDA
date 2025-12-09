@@ -1,6 +1,6 @@
 package com.example.demo.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.example.demo.DTO.ReporteContenidoDTO;
@@ -19,5 +19,5 @@ public interface ContenidoService {
 
     public ArrayList<ReporteContenidoDTO> obtenerContenidosConMasDeNReproducciones(int n);
 
-    public ArrayList<ContenidoEntity> obtenerContenidosReproducidosEnFecha(LocalDateTime fechaHora);
+    ArrayList<ContenidoEntity> obtenerContenidosReproducidosEnFecha(LocalDate fecha);
 }

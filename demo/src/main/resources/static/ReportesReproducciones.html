@@ -55,9 +55,18 @@
     </header>
 
     <main class="contenido-principal">
-        <h2>Reportes de Reproducciones</h2>
+        <h1>Reportes de Reproducciones</h1>
 
-        <table border="1" cellpadding="5" style="margin: 0 auto;">
+        <h3>Reproducciones por usuario</h3>
+        <div style="text-align:center; margin-bottom: 25px;">
+            <select id="selectUsuario">
+                <option value="">Seleccione un usuario</option>
+            </select>
+
+            <button id="btnListarReproducciones">Listar</button>
+        </div>
+        
+        <table border="1" cellpadding="15">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -66,13 +75,36 @@
                     <th>Fecha y hora</th>
                     <th>Duración</th>
                     <th>Calificación</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
 
-            <tbody id="tablaReproducciones">
-            </tbody>
+            <tbody id="tablaReproducciones"></tbody>
         </table>
+        <p id="mensajeVacio" style="text-align:center; font-weight:bold; margin-top:15px;"></p>
+        <hr style="margin: 30px 0;">
+
+        <h3>Contenidos reproducidos por fecha</h3>
+        <div style="text-align:center; margin-bottom: 25px;">
+            <input type="date" id="inputFecha">
+            <button id="btnListarPorFecha">Buscar</button>
+        </div>
+
+        <table border="1" cellpadding="15" id="tablaContenidoFecha">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Duración</th>
+                    <th>Precio</th>
+                    <th>Premium</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaContenidosFecha"></tbody>
+        </table>
+
+        <p id="mensajeFecha" style="text-align:center; font-weight:bold; margin-top:15px;"></p>
     </main>
 
     <footer class="footer">

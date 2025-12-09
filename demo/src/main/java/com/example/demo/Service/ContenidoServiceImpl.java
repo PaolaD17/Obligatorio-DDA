@@ -1,6 +1,8 @@
 package com.example.demo.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
@@ -67,14 +69,19 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public ArrayList<ContenidoEntity> obtenerContenidosReproducidosEnFecha(LocalDateTime fechaHora) {
+    public ArrayList<ContenidoEntity> obtenerContenidosReproducidosEnFecha(LocalDate fecha) {
 
-        ArrayList<ReproduccionEntity> reproducciones = reproduccionRepository.findByFechaHora(fechaHora);
+        LocalDateTime inicio = fecha.atStartOfDay();
+        LocalDateTime fin = fecha.atTime(23, 59, 59);
+
+        List<ReproduccionEntity> reproducciones = reproduccionRepository.findByFechaHoraBetween(inicio, fin);
+
         Set<ContenidoEntity> contenidos = new HashSet<>();
 
         for (ReproduccionEntity r : reproducciones) {
             contenidos.add(r.getContenido());
         }
+
         return new ArrayList<>(contenidos);
     }
 }

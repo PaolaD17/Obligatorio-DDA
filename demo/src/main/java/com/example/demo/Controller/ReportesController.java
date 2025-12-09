@@ -1,7 +1,6 @@
 package com.example.demo.Controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -87,8 +86,8 @@ public class ReportesController {
     }
 
     @GetMapping("/contenidos-por-fecha")
-    public ResponseEntity<?> contenidosPorFecha(@RequestParam String fechaHora) {
-        LocalDateTime f = LocalDateTime.parse(fechaHora);
+    public ResponseEntity<?> contenidosPorFecha(@RequestParam String fecha) {
+        LocalDate f = LocalDate.parse(fecha);
         return ResponseEntity.ok(
                 contenidoService.obtenerContenidosReproducidosEnFecha(f));
     }
