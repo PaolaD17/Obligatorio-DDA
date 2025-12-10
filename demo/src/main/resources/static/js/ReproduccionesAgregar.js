@@ -31,19 +31,33 @@ fetch("http://localhost:8080/api/usuarios")
     })
     .catch(err => console.error("Error al cargar usuarios:", err));
 
-// Cargar contenidos
-fetch("http://localhost:8080/api/contenidos")
-    .then(res => res.json())
-    .then(contenidos => {
-        const select = document.getElementById("contenido");
-        contenidos.forEach(c => {
-            const option = document.createElement("option");
-            option.value = c.id;
-            option.textContent = `${c.titulo} - ${c.categoria} - ${c.tipoOperacion} - $${c.precioSuscripcion}`;
-            select.appendChild(option);
-        });
-    })
-    .catch(err => console.error("Error al cargar contenidos:", err));
+document.getElementById("usuario").addEventListener("change", function () {
+    const usuarioId = this.value;
+
+    if (!usuarioId) return; // por seguridad
+
+    cargarContenidosParaUsuario(usuarioId);
+});
+
+function cargarContenidosParaUsuario(usuarioId) {
+    fetch(`http://localhost:8080/api/reproducciones/contenidos-usuario/${usuarioId}`)
+        .then(res => res.json())
+        .then(contenidos => {
+            const select = document.getElementById("contenido");
+            select.innerHTML = "";
+
+            contenidos.forEach(c => {
+                const option = document.createElement("option");
+                option.value = c.id;
+                option.textContent =
+                    `${c.titulo} - ${c.categoria} - $${c.precioSuscripcion}`;
+
+                select.appendChild(option);
+            });
+        })
+        .catch(err => console.error("Error al cargar contenidos:", err));
+}
+
 
 // Enviar formulario
 const form = document.getElementById("formUsuario");

@@ -58,20 +58,19 @@ public class ContenidoServiceImpl implements ContenidoService {
         return contenidoRepository.findAll();
     }
 
+    @Override
     public ArrayList<ContenidoEntity> listarContenidosParaUsuario(int usuarioId) {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findById(usuarioId);
 
-        if (usuarioOpt.isEmpty()) {
-            throw new RuntimeException("Usuario no encontrado");
-        }
+        UsuarioEntity usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        UsuarioEntity usuario = usuarioOpt.get();
-
+        // ✅ Si es PREMIUM → ve todo
         if (usuario instanceof UsuarioPremiumEntity) {
             return contenidoRepository.findAll();
-        } else {
-            return contenidoRepository.findByExclusivoPremiumFalse();
         }
+
+        // ✅ Si es ESTÁNDAR → solo NO exclusivos
+        return contenidoRepository.findByExclusivoPremiumFalse();
     }
 
     @Override
