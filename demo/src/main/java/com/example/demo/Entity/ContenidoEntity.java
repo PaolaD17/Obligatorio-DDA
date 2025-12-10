@@ -36,7 +36,7 @@ public class ContenidoEntity {
     @Min(1)
     private int duracion;
 
-    @Min(1888)
+    @Min(value = 1888, message = "El año de estreno debe ser mayor o igual a 1888")
     private int anioEstreno;
 
     @AssertTrue(message = "El año de estreno no puede ser mayor al actual")

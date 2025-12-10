@@ -59,28 +59,34 @@ document.addEventListener("DOMContentLoaded", () => {
             titulo: document.getElementById("titulo").value,
             descripcion: document.getElementById("descripcion").value,
             categoria: document.getElementById("categoria").value,
-            duracion: document.getElementById("duracion").value,
-            anioEstreno: document.getElementById("anioEstreno").value,
+            duracion: Number(document.getElementById("duracion").value),
+            anioEstreno: Number(document.getElementById("anioEstreno").value),
             tipoOperacion: document.getElementById("tipoOperacion").value,
-            precioSuscripcion: document.getElementById("precioSuscripcion").value,
+            precioSuscripcion: Number(document.getElementById("precioSuscripcion").value),
             exclusivoPremium: document.getElementById("exclusivoPremium").checked
         };
 
         fetch(`/api/contenidos/${id}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(contenidoActualizado)
         })
-            .then(response => {
-                if (response.ok) {
-                    alert("Contenido modificado correctamente");
-                    window.location.href = `/contenidos`;
-                } else {
-                    alert("Error al modificar contenido");
+            .then(async response => {
+                if (!response.ok) {
+                    let errorMessage = "Error desconocido";
+                    try {
+                        const errorData = await response.json();
+                        // Usamos el mensaje de RuntimeException
+                        if (errorData.message) errorMessage = errorData.message;
+                    } catch {
+                        // Si no es JSON, leemos como texto
+                        errorMessage = await response.text();
+                    }
+                    alert(errorMessage);
+                    return;
                 }
+                alert("Contenido modificado correctamente");
+                window.location.href = `/contenidos`;
             });
     });
-
 });

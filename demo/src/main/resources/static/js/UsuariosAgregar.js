@@ -79,8 +79,7 @@ formulario.addEventListener("submit", function (e) {
             document.getElementById("campoPremium").classList.add("oculto");
         })
         .catch(error => {
-            alert(error.message); // Esto mostrará "El email ya está en uso"
+            alert(error.message);
         });
-
 
 });

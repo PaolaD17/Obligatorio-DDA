@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.demo.Entity.UsuarioEntity;
+import com.example.demo.Entity.UsuarioPremiumEntity;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
       public ArrayList<UsuarioEntity> findAll();
@@ -22,4 +23,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
       ArrayList<UsuarioEntity> filtrarUsuarios(
                   @Param("desde") LocalDate desde,
                   @Param("hasta") LocalDate hasta);
+
+      @Query("SELECT u FROM UsuarioPremiumEntity u WHERE u.id = :id")
+      UsuarioPremiumEntity findPremiumById(@Param("id") int id);
 }

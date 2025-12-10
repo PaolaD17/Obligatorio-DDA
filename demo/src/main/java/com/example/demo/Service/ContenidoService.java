@@ -20,4 +20,6 @@ public interface ContenidoService {
     public ArrayList<ReporteContenidoDTO> obtenerContenidosConMasDeNReproducciones(int n);
 
     ArrayList<ContenidoEntity> obtenerContenidosReproducidosEnFecha(LocalDate fecha);
+
+    ArrayList<ContenidoEntity> listarContenidosParaUsuario(int usuarioId);
 }

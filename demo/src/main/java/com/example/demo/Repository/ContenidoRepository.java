@@ -8,5 +8,5 @@ import com.example.demo.Entity.ContenidoEntity;
 
 public interface ContenidoRepository extends JpaRepository<ContenidoEntity, Integer> {
     public ArrayList<ContenidoEntity> findAll();
-
+    public ArrayList<ContenidoEntity> findByExclusivoPremiumFalse();
 }
