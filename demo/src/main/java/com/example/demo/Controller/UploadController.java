@@ -24,7 +24,6 @@ public class UploadController {
     @PostMapping("/media")
     public ResponseEntity<?> uploadMedia(@RequestParam("file") MultipartFile file) {
         try {
-            // Llamamos al método del bean inyectado
             String uploadUrl = uploadthingService.uploadFile(file);
             return ResponseEntity.ok(Map.of("url", uploadUrl));
         } catch (Exception e) {

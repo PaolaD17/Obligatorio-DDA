@@ -40,7 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
             usuario = estandar;
         }
-        // Validar email único
+
         if (usuarioRepository.existsByEmail(usuario.getEmail())) {
             throw new RuntimeException("El email ya está en uso");
         }
@@ -67,20 +67,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioEntity modificarUsuario(UsuarioDTO dto, int id) {
         UsuarioEntity usuarioExistente = usuarioRepository.findById(id).orElse(null);
         if (usuarioExistente == null) {
-            return null; // o lanzar excepción
+            return null;
         }
 
         String tipoNuevo = dto.getTipoUsuario();
         String tipoActual = usuarioExistente instanceof UsuarioPremiumEntity ? "PREMIUM" : "ESTANDAR";
 
-        // Guardamos datos comunes
         String nombre = dto.getNombreCompleto();
         String email = dto.getEmail();
         LocalDate fechaRegistro = dto.getFechaRegistro();
         LocalDate fechaMembresia = dto.getFechaMembresia();
 
         if (!tipoNuevo.equalsIgnoreCase(tipoActual)) {
-            // Cambió el tipo → eliminamos el usuario existente
             usuarioRepository.deleteById(usuarioExistente.getId());
 
             UsuarioEntity nuevoUsuario;
@@ -93,14 +91,12 @@ public class UsuarioServiceImpl implements UsuarioService {
                 nuevoUsuario = estandar;
             }
 
-            // Copiamos los campos básicos
             nuevoUsuario.setNombreCompleto(nombre);
             nuevoUsuario.setEmail(email);
             nuevoUsuario.setFechaRegistro(fechaRegistro);
 
             return usuarioRepository.save(nuevoUsuario);
         } else {
-            // Mismo tipo → actualizamos los campos del usuario existente
             usuarioExistente.setNombreCompleto(nombre);
             usuarioExistente.setEmail(email);
             usuarioExistente.setFechaRegistro(fechaRegistro);

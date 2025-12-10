@@ -41,11 +41,9 @@ public class ContenidoController {
             @RequestParam("trailer") MultipartFile trailer) {
 
         try {
-            // Subir archivos y obtener URLs
             String portadaUrl = uploadthingService.uploadFile(portada);
             String trailerUrl = uploadthingService.uploadFile(trailer);
 
-            // Crear objeto Contenido
             ContenidoEntity contenido = new ContenidoEntity();
             contenido.setTitulo(titulo);
             contenido.setDescripcion(descripcion);

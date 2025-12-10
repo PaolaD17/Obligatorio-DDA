@@ -37,7 +37,7 @@ public class ReproduccionEntity {
 
     @Min(1)
     @Max(5)
-    private int calificacion; // 1–5 estrellas
+    private int calificacion;
 
     public int getId() {
         return id;

@@ -14,9 +14,9 @@ public class UsuarioPremiumEntity extends UsuarioEntity {
     @NotNull(message = "La fecha de inicio de membresía no puede ser nula")
     private LocalDate fechaInicioMembresia;
 
-    private double descuento = 0.20; // 20% de descuento en contenidos
+    private double descuento = 0.20;
 
-    private boolean accesoExclusivo = true; // Acceso fijo a contenidos exclusivos
+    private boolean accesoExclusivo = true;
 
     public LocalDate getFechaInicioMembresia() {
         return fechaInicioMembresia;

@@ -42,7 +42,6 @@ function filtrarUsuarios() {
             msgPremium.innerHTML = "";
             msgEstandar.innerHTML = "";
 
-            // ✅ PREMIUM
             if (premium.length === 0) {
                 document.getElementById("tablaPremium").style.display = "none";
                 msgPremium.innerHTML = "No hay usuarios registrados en ese rango de fechas";
@@ -60,8 +59,7 @@ function filtrarUsuarios() {
                     `;
                 });
             }
-
-            // ✅ ESTÁNDAR
+            
             if (estandar.length === 0) {
                 document.getElementById("tablaEstandar").style.display = "none";
                 msgEstandar.innerHTML = "No hay usuarios registrados en ese rango de fechas";

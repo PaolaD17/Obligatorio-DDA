@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ✅ Cargar usuarios al select
     fetch("/api/usuarios")
         .then(res => res.json())
         .then(data => {
@@ -34,11 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-    // ✅ Botón listar
     document.getElementById("btnListarReproducciones")
         .addEventListener("click", listarReproducciones);
 
-    // ✅ Listar reproducciones por usuario
     function listarReproducciones() {
 
         const usuarioId = document.getElementById("selectUsuario").value;
@@ -83,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// ✅ Botón buscar contenidos por fecha
 document.getElementById("btnListarPorFecha")
     .addEventListener("click", listarContenidosPorFecha);
 

@@ -54,6 +54,5 @@ document.addEventListener("DOMContentLoaded", () => {
 const btnModificar = document.getElementById('modificarBtn');
 
 btnModificar.addEventListener('click', () => {
-    // Esto redirige al navegador a la página indicada
     window.location.href = '/ContenidosModificar.html';
 });

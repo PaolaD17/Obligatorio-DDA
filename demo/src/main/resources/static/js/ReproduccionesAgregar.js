@@ -34,7 +34,7 @@ fetch("http://localhost:8080/api/usuarios")
 document.getElementById("usuario").addEventListener("change", function () {
     const usuarioId = this.value;
 
-    if (!usuarioId) return; // por seguridad
+    if (!usuarioId) return;
 
     cargarContenidosParaUsuario(usuarioId);
 });
@@ -57,7 +57,6 @@ function cargarContenidosParaUsuario(usuarioId) {
         })
         .catch(err => console.error("Error al cargar contenidos:", err));
 }
-
 
 // Enviar formulario
 const form = document.getElementById("formUsuario");

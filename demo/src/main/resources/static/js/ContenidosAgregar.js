@@ -16,7 +16,6 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// Form submit
 const formulario = document.getElementById("formContenido");
 
 formulario.addEventListener("submit", async function(e) {

@@ -27,7 +27,6 @@ public class UploadthingService {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String body = response.body();
 
-        // Extraer fileUrl del JSON manualmente
         int start = body.indexOf("\"fileUrl\":\"") + 11;
         int end = body.indexOf("\"", start);
         if (start >= 0 && end > start) {

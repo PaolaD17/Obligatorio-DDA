@@ -34,12 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("contenidoId").value = id;
 
-    // 🔹 TRAER CONTENIDO Y CARGAR FORMULARIO
     fetch(`/api/contenidos/${id}`)
         .then(response => response.json())
         .then(contenido => {
 
-            console.log("CONTENIDO RECIBIDO:", contenido); // ✅ debug
+            console.log("CONTENIDO RECIBIDO:", contenido);
 
             document.getElementById("titulo").value = contenido.titulo;
             document.getElementById("descripcion").value = contenido.descripcion;
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("exclusivoPremium").checked = contenido.exclusivoPremium === true;
         });
 
-    // 🔹 GUARDAR CAMBIOS
     document.getElementById("formContenido").addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -76,10 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     let errorMessage = "Error desconocido";
                     try {
                         const errorData = await response.json();
-                        // Usamos el mensaje de RuntimeException
                         if (errorData.message) errorMessage = errorData.message;
                     } catch {
-                        // Si no es JSON, leemos como texto
                         errorMessage = await response.text();
                     }
                     alert(errorMessage);

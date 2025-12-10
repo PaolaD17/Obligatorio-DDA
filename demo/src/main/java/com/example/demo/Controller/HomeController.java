@@ -41,7 +41,7 @@ public class HomeController {
 
     @GetMapping("/contenidos/modificar/{id}")
     public String contenidosModificar(@PathVariable int id, Model model) {
-        model.addAttribute("contenidoId", id); // pasar el ID al HTML
+        model.addAttribute("contenidoId", id);
         return "forward:/ContenidosModificar.html";
     }
 
@@ -59,7 +59,7 @@ public class HomeController {
 
     @GetMapping("/usuarios/modificar/{id}")
     public String modificarUsuario(@PathVariable int id, Model model) {
-        model.addAttribute("usuarioId", id); // pasar el ID al HTML
+        model.addAttribute("usuarioId", id);
         return "forward:/UsuariosModificar.html";
     }
 

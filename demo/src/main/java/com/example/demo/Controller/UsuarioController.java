@@ -31,8 +31,8 @@ public class UsuarioController {
             return ResponseEntity.ok(nuevo);
         } catch (RuntimeException e) {
             return ResponseEntity
-                    .badRequest() // HTTP 400
-                    .body(e.getMessage()); // Devuelve el mensaje al frontend
+                    .badRequest()
+                    .body(e.getMessage());
         }
     }
 

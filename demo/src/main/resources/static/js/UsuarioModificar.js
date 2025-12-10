@@ -63,10 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
             campoPremium.classList.remove("oculto");
         } else {
             campoPremium.classList.add("oculto");
-            fechaMembresia.value = ""; // 🔥 LIMPIA LA FECHA
+            fechaMembresia.value = "";
         }
     });
-
 
     //GUARDAR CAMBIOS
     document.getElementById("formUsuario").addEventListener("submit", function (e) {
@@ -96,5 +95,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
-
 });

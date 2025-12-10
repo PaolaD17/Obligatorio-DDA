@@ -33,7 +33,6 @@ public class ContenidoServiceImpl implements ContenidoService {
     @Override
     public ContenidoEntity agregarContenido(ContenidoEntity contenido) {
 
-        // Validaciones
         int anioActual = java.time.Year.now().getValue();
 
         if (contenido.getAnioEstreno() < 1888 || contenido.getAnioEstreno() > anioActual) {
@@ -49,7 +48,6 @@ public class ContenidoServiceImpl implements ContenidoService {
             throw new RuntimeException("El año de estreno debe estar entre 1888 y " + java.time.Year.now().getValue());
         }
 
-        // Todo OK, guardamos
         return contenidoRepository.save(contenido);
     }
 
@@ -64,12 +62,10 @@ public class ContenidoServiceImpl implements ContenidoService {
         UsuarioEntity usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        // ✅ Si es PREMIUM → ve todo
         if (usuario instanceof UsuarioPremiumEntity) {
             return contenidoRepository.findAll();
         }
 
-        // ✅ Si es ESTÁNDAR → solo NO exclusivos
         return contenidoRepository.findByExclusivoPremiumFalse();
     }
 
@@ -90,7 +86,6 @@ public class ContenidoServiceImpl implements ContenidoService {
         ContenidoEntity existente = contenidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contenido no encontrado"));
 
-        // Validaciones claras
         int anioActual = java.time.Year.now().getValue();
 
         if (nuevo.getAnioEstreno() < 1888 || nuevo.getAnioEstreno() > anioActual) {
@@ -106,7 +101,6 @@ public class ContenidoServiceImpl implements ContenidoService {
             throw new RuntimeException("El año de estreno debe estar entre 1888 y " + java.time.Year.now().getValue());
         }
 
-        // Si pasó las validaciones, se actualizan los campos
         existente.setTitulo(nuevo.getTitulo());
         existente.setDescripcion(nuevo.getDescripcion());
         existente.setCategoria(nuevo.getCategoria());

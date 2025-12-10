@@ -19,12 +19,10 @@ document.addEventListener("click", function (e) {
 
 const apiUrl = "http://localhost:8080/api/reproducciones";
 
-// 1️⃣ Leer ID de la URL y precargar datos
 const params = new URLSearchParams(window.location.search);
 const reproduccionId = params.get("id");
 document.getElementById("reproduccionId").value = reproduccionId;
 
-// Precargar la reproducción existente
 fetch(`${apiUrl}/${reproduccionId}`)
     .then(res => res.json())
     .then(data => {
@@ -38,13 +36,12 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// 3️⃣ Función para modificar la reproducción
 function modificarReproduccion() {
     const calificacion = parseInt(document.getElementById("calificacion").value);
 
     const reproduccion = { calificacion: calificacion };
 
-    fetch(`${apiUrl}/${reproduccionId}`, {  // usamos la variable del ID
+    fetch(`${apiUrl}/${reproduccionId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reproduccion)
@@ -55,12 +52,11 @@ function modificarReproduccion() {
     })
     .then(data => {
         alert("Reproducción modificada correctamente");
-        window.location.href = "/reproducciones"; // opcional: volver a la lista
+        window.location.href = "/reproducciones";
     })
     .catch(err => console.error(err));
 }
 
-// 4️⃣ Capturar submit del formulario
 document.getElementById("formReproduccion").addEventListener("submit", function(e) {
     e.preventDefault();
     modificarReproduccion();

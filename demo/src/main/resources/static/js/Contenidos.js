@@ -88,7 +88,6 @@ fetch("http://localhost:8080/api/contenidos")
     .catch(err => console.error(err));
 
 function verDetalle(id) {
-    // Redirige a la página de detalle
     window.location.href = `/contenidos/detalle?id=${id}`;
 }
 
