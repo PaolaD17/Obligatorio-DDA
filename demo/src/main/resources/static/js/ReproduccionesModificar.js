@@ -17,7 +17,7 @@ document.addEventListener("click", function (e) {
     }
 });
 
-const apiUrl = "http://localhost:8080/api/reproducciones";
+const apiUrl = "http://localhost:8080/api/reproducciones/modificar";
 
 const params = new URLSearchParams(window.location.search);
 const reproduccionId = params.get("id");

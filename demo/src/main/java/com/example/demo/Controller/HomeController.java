@@ -74,6 +74,11 @@ public class HomeController {
         return "redirect:/ReproduccionesAgregar.html";
     }
 
+    @GetMapping("/reproducciones/modificar")
+    public String modificarReproduccion() {
+        return "redirect:/ReproduccionesModificar.html";
+    }
+
     // REPORTES
     @GetMapping("/reportes/contenidos")
     public String reportesContenidos() {
