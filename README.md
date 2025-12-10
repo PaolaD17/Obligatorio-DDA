@@ -1,2 +1,2 @@
-Obligatorio 2 de DDA.
+Obligatorio 2 - DDA.
 Integrantes: Alfonsina Besco y Paola Díaz
