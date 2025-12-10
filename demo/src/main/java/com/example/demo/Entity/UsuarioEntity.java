@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +31,7 @@ public class UsuarioEntity {
 
     @Email(message = "El email debe tener un formato válido")
     @NotBlank(message = "El email no puede estar vacío")
+    @Column(unique = true)
     private String email;
 
     @NotNull(message = "La fecha de registro no puede ser nula")

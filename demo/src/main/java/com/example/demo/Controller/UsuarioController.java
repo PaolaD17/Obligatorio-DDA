@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.example.demo.DTO.UsuarioDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,15 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping()
-    public UsuarioEntity agregarUsuario(@RequestBody UsuarioDTO dto) {
-        return usuarioService.agregarUsuario(dto);
+    public ResponseEntity<?> agregarUsuario(@RequestBody UsuarioDTO dto) {
+        try {
+            UsuarioEntity nuevo = usuarioService.agregarUsuario(dto);
+            return ResponseEntity.ok(nuevo);
+        } catch (RuntimeException e) {
+            return ResponseEntity
+                    .badRequest() // HTTP 400
+                    .body(e.getMessage()); // Devuelve el mensaje al frontend
+        }
     }
 
     @GetMapping()
